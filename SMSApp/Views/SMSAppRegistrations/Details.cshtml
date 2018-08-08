@@ -1,0 +1,124 @@
+﻿@model SMSApp.Models.SMSAppRegistration
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SMSAppRegistration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Constituency.ConstituencyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Constituency.ConstituencyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.County.CountyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.County.CountyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender.GenderType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender.GenderType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaritalStatus.MaritalStatusType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaritalStatus.MaritalStatusType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PWDCategory.PWDCategoryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PWDCategory.PWDCategoryType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullNames)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NationalIDNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NationalIDNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearofBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearofBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Occupation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Occupation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SMSAppRegistrationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<script>
+    $('#SMSAppRegistration').dataTable({
+        aaSorting: [[0, 'dsc']],
+        dom: 'Bfrtip',
+        buttons: [
+            'pdf', 'csv', 'print', 'excel'
+        ],
+        "bDestroy": true
+    });
+</script>

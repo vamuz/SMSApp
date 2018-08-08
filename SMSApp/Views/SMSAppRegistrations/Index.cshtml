@@ -1,0 +1,126 @@
+﻿@model IEnumerable<SMSApp.Models.SMSAppRegistration>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />*@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+
+<table id="SMSAppRegistrations" class="table-hover table-striped" style="width:50%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullNames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalIDNo)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.YearofBirth)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Gender.GenderType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaritalStatus.MaritalStatusType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Constituency.ConstituencyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.County.CountyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PWDCategory.PWDCategoryType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullNames)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NationalIDNo)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.YearofBirth)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender.GenderType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaritalStatus.MaritalStatusType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Constituency.ConstituencyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.County.CountyName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PWDCategory.PWDCategoryType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Occupation)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>*@
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SMSAppRegistrationId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SMSAppRegistrationId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SMSAppRegistrationId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+
+    
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/dataTables.responsive.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#SMSAppRegistrations').DataTable()
+
+        });
+
+        
+    </script>
+}

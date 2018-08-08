@@ -1,0 +1,5 @@
+D:\Web Development\SMSApp\.vs\SMSApp\lut\0\i\SMSApp\Debug\SMSApp.Migrations.InitialCreate.resources
+D:\Web Development\SMSApp\.vs\SMSApp\lut\0\i\SMSApp\Debug\SMSApp.Migrations.addsmsapptables.resources
+D:\Web Development\SMSApp\.vs\SMSApp\lut\0\i\SMSApp\Debug\SMSApp.Migrations.updatecontituencytable.resources
+D:\Web Development\SMSApp\.vs\SMSApp\lut\0\i\SMSApp\Debug\SMSApp.csproj.GenerateResource.cache
+D:\Web Development\SMSApp\.vs\SMSApp\lut\0\i\SMSApp\Debug\SMSApp.csproj.CoreCompileInputs.cache

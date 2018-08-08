@@ -1,0 +1,238 @@
+﻿@using SMSApp.Models
+@model SMSApp.Models.SMSAppRegistration
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SMSAppRegistration</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FullNames, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullNames, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NationalIDNo, "National ID/Passport No", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NationalIDNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NationalIDNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YearofBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearofBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YearofBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaritalStatusId, "MaritalStatus", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaritalStatusId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaritalStatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GenderId, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("GenderId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CountyId", null, htmlAttributes: new {
+               @class = "form-control"
+                      /*@onchange = "FillConstituency();"*/,})
+                @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConstituencyId, "Constituency", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConstituencyId", null, htmlAttributes: new
+                                                                               {
+                            @class = "form-control",})
+                @Html.ValidationMessageFor(model => model.ConstituencyId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PWDCategoryId, "PWDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PWDCategoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PWDCategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        //on county click
+        $("#CountyId").on("change", function () {
+            var county = $('#CountyId').val();
+            $("#ConstituencyId").removeProp('disabled');
+            $.ajax({
+                url: '/SMSAppRegistrations/FillConstituency',
+                type: "GET",
+                dataType: "JSON",
+                data: { location: county },
+                success: function (location) {
+                    $("#ConstituencyId").html(""); // clear before appending new list
+                    $.each(location, function (i, city) {
+                        $("#ConstituencyId").append(
+                            $('<option></option>').val(city.Id).html(city.ConstituencyName));
+                    });
+                }
+            });
+        });
+        function FillConstituency() {
+            console.log('countytest');
+            var county = $('#CountyId').val();
+            $("#ConstituencyId").removeProp('disabled');
+            $.ajax({
+                url: '/SMSAppRegistrations/FillConstituency',
+                type: "GET",
+                dataType: "JSON",
+                data: { location: county },
+                success: function (location) {
+                    $("#ConstituencyId").html(""); // clear before appending new list
+                    $.each(location, function (i, city) {
+                        $("#ConstituencyId").append(
+                            $('<option></option>').val(city.Id).html(city.ConstituencyName));
+                    });
+                }
+            });
+        
+            $(function() {
+
+                $("#NationalNationalIDNo").change(checkNationalId());
+
+            });
+
+ 
+
+            function checkNationalId() {
+
+                $.ajax({
+
+                    type: "POST",
+
+                    url: "/SMSAppRegistrations/ValidateNationalID",
+
+                    data: {NationalIDNo: $('#NationalIDNo').val()},
+
+                    success: function(response) {
+
+                        $("#duplicate").empty();
+
+                        if (response.d != "0") {
+
+                            $("#duplicate").html(' That user name has already been taken');
+
+                        }
+
+                    }
+
+                });
+
+            }  
+        }
+        
+    </script>
+}
+    
+
+
+
+<script>
+
+            ////on county load
+            //$(document).ready(function ()
+            //{
+            //    var countyId = $('#County').val();
+            //    //$("#SubCounty").removeProp('disabled');
+            //    $.ajax({
+            //        url: '/SMSAppRegistrations/FillConstituency',
+            //        type: "GET",
+            //        dataType: "JSON",
+            //        data: { County: CountyId },
+            //        success: function (County) {
+            //            $("#ConstituencyId").html(""); // clear before appending new list
+            //            $.each(County, function (i, County) {
+            //                $("#ConstituencyId").append(
+            //                    $('<option></option>').val(County.Id).html(city.Constituency));
+            //            });
+            //        }
+            //    });
+            //});
+
+
+
+</script>
