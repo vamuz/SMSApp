@@ -161,19 +161,7 @@ namespace SMSApp.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
 
         }
-        public ActionResult ValidateEmail(string emailadd)
-        {
-            var email = db.SmsAppRegistration.Where(n => n.EmailAddress == emailadd);
-            var status = false;
-            if (email != null)
-            {
-                status = true;
-
-            }
-
-            return Json(status, JsonRequestBehavior.AllowGet);
-
-        }
+      
         public ActionResult Edit(int? id)
         {
             if (id == null)

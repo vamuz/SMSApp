@@ -213,22 +213,22 @@
                 });
             });
 
-        //$("#EmailAddress").on("change keyup",
-        //    function () {
-        //        var contact = $('#EmailAddress').val();
-        //        $.ajax({
-        //            url: '/SMSAppRegistrations/ValidateEmail',
-        //            type: "GET",
-        //            dataType: "JSON",
-        //            data: { emailadd: contact },
-        //            success: function (status) {
-        //                if (status === true) {
-        //                    var html = 'The email address is already on the database';
-        //                    $('#notification').html(html).addClass('alert alert-danger');
-        //                }
-        //            }
-        //        });
-        //    });
+        $("#EmailAddress").on("change keyup",
+            function () {
+                var contact = $('#EmailAddress').val();
+                $.ajax({
+                    url: '/SMSAppRegistrations/ValidateEmail',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { emailadd: contact },
+                    success: function (status) {
+                        if (status === true) {
+                            var html = 'The email address is already on the database';
+                            $('#notification').html(html).addClass('alert alert-danger');
+                        }
+                    }
+                });
+            });
     </script>
 }
 
