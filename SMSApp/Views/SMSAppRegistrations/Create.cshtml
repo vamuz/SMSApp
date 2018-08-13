@@ -19,6 +19,7 @@
     <div class="form-horizontal">
         <h4>SMSAppRegistration</h4>
         <hr />
+        <div id="notification"></div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -135,23 +136,26 @@
 
     <script>
         //on county click
-        $("#CountyId").on("change", function () {
-            var county = $('#CountyId').val();
-            $("#ConstituencyId").removeProp('disabled');
-            $.ajax({
-                url: '/SMSAppRegistrations/FillConstituency',
-                type: "GET",
-                dataType: "JSON",
-                data: { location: county },
-                success: function (location) {
-                    $("#ConstituencyId").html(""); // clear before appending new list
-                    $.each(location, function (i, city) {
-                        $("#ConstituencyId").append(
-                            $('<option></option>').val(city.Id).html(city.ConstituencyName));
-                    });
-                }
+        $("#CountyId").on("change",
+            function () {
+                var county = $('#CountyId').val();
+                $("#ConstituencyId").removeProp('disabled');
+                $.ajax({
+                    url: '/SMSAppRegistrations/FillConstituency',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { location: county },
+                    success: function (location) {
+                        $("#ConstituencyId").html(""); // clear before appending new list
+                        $.each(location,
+                            function (i, city) {
+                                $("#ConstituencyId").append(
+                                    $('<option></option>').val(city.Id).html(city.ConstituencyName));
+                            });
+                    }
+                });
             });
-        });
+
         function FillConstituency() {
             console.log('countytest');
             var county = $('#CountyId').val();
@@ -163,57 +167,77 @@
                 data: { location: county },
                 success: function (location) {
                     $("#ConstituencyId").html(""); // clear before appending new list
-                    $.each(location, function (i, city) {
-                        $("#ConstituencyId").append(
-                            $('<option></option>').val(city.Id).html(city.ConstituencyName));
-                    });
+                    $.each(location,
+                        function (i, city) {
+                            $("#ConstituencyId").append(
+                                $('<option></option>').val(city.Id).html(city.ConstituencyName));
+                        });
                 }
             });
-        
-            $(function() {
 
-                $("#NationalNationalIDNo").change(checkNationalId());
+        }
 
-            });
-
- 
-
-            function checkNationalId() {
-
+        $("#NationalIDNo").on("change keyup",
+            function () {
+                var idNo = $('#NationalIDNo').val();
                 $.ajax({
-
-                    type: "POST",
-
-                    url: "/SMSAppRegistrations/ValidateNationalID",
-
-                    data: {NationalIDNo: $('#NationalIDNo').val()},
-
-                    success: function(response) {
-
-                        $("#duplicate").empty();
-
-                        if (response.d != "0") {
-
-                            $("#duplicate").html(' That user name has already been taken');
-
+                    url: '/SMSAppRegistrations/ValidateNationalID',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { idno: idNo },
+                    success: function (status) {
+                        if (status === true) {
+                            var html = 'The national idno is already on the database';
+                            $('#notification').html(html).addClass('alert alert-danger');
                         }
 
                     }
-
                 });
+            });
 
-            }  
-        }
-        
+
+        $("#PhoneNo").on("change keyup",
+            function () {
+                var pnumber = $('#PhoneNo').val();
+                $.ajax({
+                    url: '/SMSAppRegistrations/ValidatePhoneNo',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { Phone: pnumber },
+                    success: function (status) {
+                        if (status === true) {
+                            var html = 'The Phone number is already on the database';
+                            $('#notification').html(html).addClass('alert alert-danger');
+                        }
+                    }
+                });
+            });
+
+        $("#EmailAddress").on("change keyup",
+            function () {
+                var contact = $('#EmailAddress').val();
+                $.ajax({
+                    url: '/SMSAppRegistrations/ValidateEmail',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { emailadd: contact },
+                    success: function (status) {
+                        if (status === true) {
+                            var html = 'The email address is already on the database';
+                            $('#notification').html(html).addClass('alert alert-danger');
+                        }
+                    }
+                });
+            });
     </script>
 }
-    
+
 
 
 
 <script>
 
-            ////on county load
+                                        ////on county load
             //$(document).ready(function ()
             //{
             //    var countyId = $('#County').val();
@@ -232,7 +256,4 @@
             //        }
             //    });
             //});
-
-
-
 </script>

@@ -135,14 +135,33 @@ namespace SMSApp.Controllers
         //    return Json(!this.db.SmsAppRegistration.Any(
         //                    NationalId => NationalId.NationalIDNo == NationalIDNo), JsonRequestBehavior.AllowGet);
         //}
-        public ActionResult ValidateNationalID(int NationalIDNo)
+        public ActionResult ValidateNationalID(int idno)
         {
-            var nationalid = this.db.SmsAppRegistration.Where(n => n.NationalIDNo == NationalIDNo);
-            return Json(!this.db.SmsAppRegistration.Any
-                            (NationalId => NationalId.NationalIDNo == NationalIDNo), JsonRequestBehavior.AllowGet);
-   
-        }
+            var nationalid = db.SmsAppRegistration.Where(n => n.NationalIDNo == idno);
+            var status = false ;
+            if (nationalid != null)
+            {
+                status = true;
+             
+            }
 
+            return Json(status , JsonRequestBehavior.AllowGet);
+
+        }
+        public ActionResult ValidatePhoneNo(int Phone)
+        {
+            var phoneNo = db.SmsAppRegistration.Where(n => n.PhoneNo == Phone);
+            var status = false;
+            if (phoneNo != null)
+            {
+                status = true;
+
+            }
+
+            return Json(status, JsonRequestBehavior.AllowGet);
+
+        }
+      
         public ActionResult Edit(int? id)
         {
             if (id == null)
