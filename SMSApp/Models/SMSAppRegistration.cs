@@ -18,6 +18,7 @@ namespace SMSApp.Models
         public string FullNames { get; set; }
 
         [Required]
+       [MinLength(5)]
         //[Remote("IsNationalIDAvailable","SMSAppRegistrations",ErrorMessage = "National ID No already exists")]
         public int NationalIDNo { get; set; }
 
