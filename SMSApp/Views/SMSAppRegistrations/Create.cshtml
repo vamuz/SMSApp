@@ -20,8 +20,7 @@
     <h4>SMSAppRegistration</h4>
     <hr />
     <div id="notification"></div>
-    <div id="checklength"></div>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
