@@ -18,6 +18,10 @@ namespace SMSApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SMSAppRegistrations
+        public ActionResult Test()
+        {
+            return View();
+        }
         public ActionResult Index()
 
         {
@@ -161,7 +165,7 @@ namespace SMSApp.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
 
         }
-      
+     
         public ActionResult Edit(int? id)
         {
             if (id == null)

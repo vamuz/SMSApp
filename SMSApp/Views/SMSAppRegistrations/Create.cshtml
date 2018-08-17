@@ -142,7 +142,7 @@
     <script>
         //on county click
         $("#CountyId").on("change",
-            function () {
+            function() {
                 var county = $('#CountyId').val();
                 $("#ConstituencyId").removeProp('disabled');
                 $.ajax({
@@ -150,10 +150,10 @@
                     type: "GET",
                     dataType: "JSON",
                     data: { location: county },
-                    success: function (location) {
+                    success: function(location) {
                         $("#ConstituencyId").html(""); // clear before appending new list
                         $.each(location,
-                            function (i, city) {
+                            function(i, city) {
                                 $("#ConstituencyId").append(
                                     $('<option></option>').val(city.Id).html(city.ConstituencyName));
                             });
@@ -170,10 +170,10 @@
                 type: "GET",
                 dataType: "JSON",
                 data: { location: county },
-                success: function (location) {
+                success: function(location) {
                     $("#ConstituencyId").html(""); // clear before appending new list
                     $.each(location,
-                        function (i, city) {
+                        function(i, city) {
                             $("#ConstituencyId").append(
                                 $('<option></option>').val(city.Id).html(city.ConstituencyName));
                         });
@@ -183,34 +183,36 @@
         }
 
         $("#NationalIDNo").on("change keyup",
-            function () {
+            function() {
                 var idNo = $('#NationalIDNo').val();
-                $.ajax({
-                    url: '/SMSAppRegistrations/ValidateNationalID',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { idno: idNo },
-                    success: function (status) {
-                        if (status === true && idNo.length>5){
-                            var html = 'The national idno is already on the database';
-                            $('#notification').html(html).addClass('alert alert-danger');
-                        }
+                if (idNo.length >= 5) {
+                    $.ajax({
+                        url: '/SMSAppRegistrations/ValidateNationalID',
+                        type: "GET",
+                        dataType: "JSON",
+                        data: { idno: idNo },
+                        success: function(status) {
+                            if (status === true && idNo.length > 5) {
+                                var html = 'The national idno is already on the database';
+                                $('#notification').html(html).addClass('alert alert-danger');
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }
             });
 
 
         $("#PhoneNo").on("change keyup",
-            function () {
+            function() {
                 var pnumber = $('#PhoneNo').val();
                 $.ajax({
                     url: '/SMSAppRegistrations/ValidatePhoneNo',
                     type: "GET",
                     dataType: "JSON",
                     data: { Phone: pnumber },
-                    success: function (status) {
-                        if (status === true) {
+                    success: function(status) {
+                        if (status === true && pnumber.length > 5) {
                             var html = 'The Phone number is already on the database';
                             $('#notification').html(html).addClass('alert alert-danger');
                         }
@@ -219,14 +221,14 @@
             });
 
         $("#EmailAddress").on("change keyup",
-            function () {
+            function() {
                 var contact = $('#EmailAddress').val();
                 $.ajax({
                     url: '/SMSAppRegistrations/ValidateEmail',
                     type: "GET",
                     dataType: "JSON",
                     data: { emailadd: contact },
-                    success: function (status) {
+                    success: function(status) {
                         if (status === true) {
                             var html = 'The email address is already on the database';
                             $('#notification').html(html).addClass('alert alert-danger');
