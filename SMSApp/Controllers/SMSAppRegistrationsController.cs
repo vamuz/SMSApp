@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SMSApp.Models;
+using System.IO;
 
 namespace SMSApp.Controllers
 {
@@ -233,7 +234,28 @@ namespace SMSApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult FileUpload(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/UploadedFiles"), filename);
+                    file.SaveAs(path);
+                }
 
+                ViewBag.Message = "File Uploaded Successfully";
+                return View();
+            }
+            catch
+            {
+                ViewBag.Message = "File Not Uploaded Successfully";
+                return View();
+            }
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

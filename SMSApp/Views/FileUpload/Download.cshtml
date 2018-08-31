@@ -1,0 +1,42 @@
+﻿@{
+
+    ViewBag.Title = "Download Files";
+    var Files = (ViewBag.Files as string[]);
+
+    if (Files != null && Files.Any())
+    {
+        foreach (var file in Files)
+        {
+            <br />
+            @Html.ActionLink(file, "DownloadFile", new { fileName = file })
+            @*@Html.ActionLink(file, "Download", new { fileName = file })*@
+            <br />
+        }
+    }
+    else
+    {
+        <label>No File(s) to Download</label>
+    }
+}
+
+@*@{
+        ViewBag.Title = "Downloads";
+    }
+
+    <h2>Downloads</h2>
+
+
+    @model List<string>
+    <h2>Downloads</h2>
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Link</th>
+        </tr>
+        @for (var i = 0; i <= Model.Count - 1; i++)
+        {
+            <br />
+            @Html.ActionLink(file, "Download", new { fileName = file })
+            <br />
+        }
+    </table>*@
