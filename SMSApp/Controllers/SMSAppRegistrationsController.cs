@@ -15,7 +15,7 @@ namespace SMSApp.Controllers
     [Authorize]
     public class SMSAppRegistrationsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        public ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SMSAppRegistrations
         public ActionResult Index()
@@ -60,40 +60,40 @@ namespace SMSApp.Controllers
         [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1005:SingleLineCommentsMustBeginWithSingleSpace", Justification = "Reviewed. Suppression is OK here.")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( SMSAppRegistration sMSAppRegistration)
-        {
-            //[Bind(Include = "SMSAppRegistrationId,")]
-            this.Validation(sMSAppRegistration);
+        //public ActionResult Create( SMSAppRegistration sMSAppRegistration)
+        //{
+        //    //[Bind(Include = "SMSAppRegistrationId,")]
+        //    this.Validation(sMSAppRegistration);
 
-            if (ModelState.IsValid)
-            {
-                var newSMSEntry =new SMSAppRegistration()
-                                     {
-                                         FullNames=sMSAppRegistration.FullNames,
-                                         NationalIDNo=sMSAppRegistration.NationalIDNo,
-                                         YearofBirth=sMSAppRegistration.YearofBirth,
-                                         PhoneNo=sMSAppRegistration.PhoneNo,
-                                         EmailAddress=sMSAppRegistration.EmailAddress,
-                                         MaritalStatusId=sMSAppRegistration.MaritalStatusId,
-                                         GenderId=sMSAppRegistration.GenderId,
-                                         Occupation=sMSAppRegistration.Occupation,
-                                         CountyId=sMSAppRegistration.CountyId,
-                                         ConstituencyId=sMSAppRegistration.ConstituencyId,
-                                         Location=sMSAppRegistration.Location,
-                                         PWDCategoryId=sMSAppRegistration.PWDCategoryId
-                                     };
-                db.SmsAppRegistration.Add(newSMSEntry);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newSMSEntry =new SMSAppRegistration()
+        //                             {
+        //                                 FullNames=sMSAppRegistration.FullNames,
+        //                                 NationalIDNo=sMSAppRegistration.NationalIDNo,
+        //                                 YearofBirth=sMSAppRegistration.YearofBirth,
+        //                                 PhoneNo=sMSAppRegistration.PhoneNo,
+        //                                 EmailAddress=sMSAppRegistration.EmailAddress,
+        //                                 MaritalStatusId=sMSAppRegistration.MaritalStatusId,
+        //                                 GenderId=sMSAppRegistration.GenderId,
+        //                                 Occupation=sMSAppRegistration.Occupation,
+        //                                 CountyId=sMSAppRegistration.CountyId,
+        //                                 ConstituencyId=sMSAppRegistration.ConstituencyId,
+        //                                 Location=sMSAppRegistration.Location,
+        //                                 PWDCategoryId=sMSAppRegistration.PWDCategoryId
+        //                             };
+        //        db.SmsAppRegistration.Add(newSMSEntry);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName", sMSAppRegistration.ConstituencyId);
-            ViewBag.CountyId = new SelectList(db.County, "Id", "CountyName", sMSAppRegistration.CountyId);
-            ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType", sMSAppRegistration.GenderId);
-            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType", sMSAppRegistration.MaritalStatusId);
-            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
-            return View(sMSAppRegistration);
-        }
+        //    ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName", sMSAppRegistration.ConstituencyId);
+        //    ViewBag.CountyId = new SelectList(db.County, "Id", "CountyName", sMSAppRegistration.CountyId);
+        //    ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType", sMSAppRegistration.GenderId);
+        //    ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType", sMSAppRegistration.MaritalStatusId);
+        //    ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
+        //    return View(sMSAppRegistration);
+        //}
 
         private void Validation(SMSAppRegistration sMSAppRegistration)
         {

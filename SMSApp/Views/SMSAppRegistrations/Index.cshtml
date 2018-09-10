@@ -117,10 +117,22 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#SMSAppRegistrations').DataTable()
+                $('#SMSAppRegistrations').dataTable({
+                    responsive: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ]
+                });
 
-        });
+            });
 
         
     </script>
+
+        
+   
 }

@@ -12,10 +12,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()*@
+<form>
     <div class="form-horizontal">
         <h4>SMSAppRegistration</h4>
         <hr />
@@ -87,8 +87,8 @@
             @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CountyId", null, htmlAttributes: new {
-               @class = "form-control"
-                      /*@onchange = "FillConstituency();"*/,})
+                    @class = "form-control"
+                    /*@onchange = "FillConstituency();"*/,})
                 @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -97,8 +97,8 @@
             @Html.LabelFor(model => model.ConstituencyId, "Constituency", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ConstituencyId", null, htmlAttributes: new
-                                                                               {
-                            @class = "form-control",})
+                {
+                    @class = "form-control",})
                 @Html.ValidationMessageFor(model => model.ConstituencyId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -121,11 +121,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @*<input type="submit" value="Create" class="btn btn-default" />*@
+                <button class="btn btn-success" id="btnSave">Save Record</button>
             </div>
         </div>
     </div>
-}
+</form>
+@*}*@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -135,6 +137,56 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+
+        //post data to db using webapi
+        $(function () {
+            $("#btnSave").click(function () {
+
+                var FullNames = $("#FullNames").val();
+                var NationalIDNo = $("#NationalIDNo").val();
+                var YearofBirth = $("#YearofBirth").val();
+                var PhoneNo = $("#PhoneNo").val();
+                var EmailAddress = $("#EmailAddress").val();
+                var MaritalStatusId = $("#MaritalStatusId").val();
+                var GenderId = $("#GenderId").val();
+                var Occupation = $("#Occupation").val();
+                var CountyId = $("#CountyId").val();
+                var ConstituencyId = $("#ConstituencyId").val();
+                var Location = $("#Location").val();
+                var PWDCategoryId = $("#PWDCategoryId").val();
+
+
+                var userData = {
+                    FullNames: FullNames,
+                    NationalIDNo: NationalIDNo,
+                    YearofBirth: YearofBirth,
+                    PhoneNo: PhoneNo,
+                    EmailAddress: EmailAddress,
+                    MaritalStatusId: MaritalStatusId,
+                    GenderId: GenderId,
+                    Occupation: Occupation,
+                    CountyId: CountyId,
+                    ConstituencyId: ConstituencyId,
+                    Location: Location,
+                    PWDCategoryId: PWDCategoryId,
+
+                };
+                var json = JSON.stringify(userData);
+
+                $.ajax({
+                    type: "POST",
+                    url: '/api/UserDetails',
+                    data: json,
+                    contentType: "application/json",
+                    success: function (data, status, xhr) {
+                        alert("Data Saved Successfully");
+                    },
+                    error: function (xhr) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+        });
         //on county click
         $("#CountyId").on("change",
             function () {
@@ -237,23 +289,23 @@
 
 <script>
 
-                                        ////on county load
-            //$(document).ready(function ()
-            //{
-            //    var countyId = $('#County').val();
-            //    //$("#SubCounty").removeProp('disabled');
-            //    $.ajax({
-            //        url: '/SMSAppRegistrations/FillConstituency',
-            //        type: "GET",
-            //        dataType: "JSON",
-            //        data: { County: CountyId },
-            //        success: function (County) {
-            //            $("#ConstituencyId").html(""); // clear before appending new list
-            //            $.each(County, function (i, County) {
-            //                $("#ConstituencyId").append(
-            //                    $('<option></option>').val(County.Id).html(city.Constituency));
-            //            });
-            //        }
-            //    });
-            //});
+        ////on county load
+        //$(document).ready(function ()
+        //{
+        //    var countyId = $('#County').val();
+        //    //$("#SubCounty").removeProp('disabled');
+        //    $.ajax({
+        //        url: '/SMSAppRegistrations/FillConstituency',
+        //        type: "GET",
+        //        dataType: "JSON",
+        //        data: { County: CountyId },
+        //        success: function (County) {
+        //            $("#ConstituencyId").html(""); // clear before appending new list
+        //            $.each(County, function (i, County) {
+        //                $("#ConstituencyId").append(
+        //                    $('<option></option>').val(County.Id).html(city.Constituency));
+        //            });
+        //        }
+        //    });
+        //});
 </script>
