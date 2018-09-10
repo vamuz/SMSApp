@@ -113,12 +113,20 @@
 </p>
 
 <script>
-    $('#SMSAppRegistration').dataTable({
-        aaSorting: [[0, 'dsc']],
-        dom: 'Bfrtip',
-        buttons: [
-            'pdf', 'csv', 'print', 'excel'
-        ],
-        "bDestroy": true
+
+    $(document).ready(function () {
+        $('#SMSAppRegistrations').dataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+
     });
+
+        
 </script>

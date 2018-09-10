@@ -9,9 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@*<link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />*@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/datatables.min.css" rel="stylesheet" />
+<link href="~/Content/datatables.bootstrap.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" />
 
 <table id="SMSAppRegistrations" class="table-hover table-striped" style="width:50%">
     <thead>
@@ -22,9 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.NationalIDNo)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.YearofBirth)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Gender.GenderType)
             </th>
@@ -46,12 +47,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Occupation)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Location)
-            </th>*@
-            @*<th>
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>*@
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -65,9 +66,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NationalIDNo)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.YearofBirth)
-                </td>*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Gender.GenderType)
                 </td>
@@ -90,12 +91,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Occupation)
                 </td>
-                @*<td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Location)
-                </td>*@
-                @*<td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.EmailAddress)
-                </td>*@
+                </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.SMSAppRegistrationId }) |
                     @Html.ActionLink("Details", "Details", new { id = item.SMSAppRegistrationId }) |
@@ -107,32 +108,34 @@
 </table>
 
 @section Scripts{
-
-    
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    @*<script src="~/Scripts/datatables.min.js"></script>
+    <script src="~/Scripts/datatables.bootstrap.js"></script>*@
     <script src="~/Scripts/dataTables.responsive.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
     <script>
         $(document).ready(function () {
-                $('#SMSAppRegistrations').dataTable({
-                    responsive: true,
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'copyHtml5',
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
-                    ]
-                });
-
+            $('#SMSAppRegistrations').dataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
             });
 
-        
+        });
+
+
     </script>
 
-        
-   
+
+
 }
