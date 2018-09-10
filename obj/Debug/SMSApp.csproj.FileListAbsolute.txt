@@ -403,3 +403,9 @@ D:\Web Development\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CoreCompileInput
 D:\Web Development\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CopyComplete
 D:\Web Development\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.dll
 D:\Web Development\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.pdb
+D:\Web Development\SMSApp\SMSApp\bin\System.Net.Http.Formatting.dll
+D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.dll
+D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.WebHost.dll
+D:\Web Development\SMSApp\SMSApp\bin\System.Net.Http.Formatting.xml
+D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.xml
+D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.WebHost.xml
