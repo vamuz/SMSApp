@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -203,6 +204,50 @@ namespace SMSApp.Controllers
             ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
             return View(sMSAppRegistration);
         }
+
+        [HttpPost]
+        public JsonResult Upload()
+        {
+            try
+            {
+                string id = Request.Form["id"];
+
+                foreach (string file in Request.Files)
+                {
+                    var fileContent = Request.Files[file];
+
+                    if (fileContent != null && fileContent.ContentLength > 0)
+                    {
+
+                        var fileExtension = Path.GetExtension(fileContent.FileName);
+                        if (fileExtension != "pdf")
+                        {
+                            id = id + ".pdf";
+                        }
+                        else
+                        {
+                            id = id + fileExtension;
+                        }
+
+                        //var fileName = Path.GetFileName(fileContent.FileName);
+                        if (id != null)
+                        {
+                            var path = Path.Combine(Server.MapPath("~/ScannedFiles"), id);
+                            fileContent.SaveAs(path);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json("Upload failed");
+            }
+
+            return Json("File uploaded successfully");
+        }
+
 
         // GET: SMSAppRegistrations/Delete/5
         public ActionResult Delete(int? id)

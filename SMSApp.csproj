@@ -253,6 +253,10 @@
     <Compile Include="Migrations\201807101309594_addextravalidations.Designer.cs">
       <DependentUpon>201807101309594_addextravalidations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171126171_nochange.cs" />
+    <Compile Include="Migrations\201809171126171_nochange.Designer.cs">
+      <DependentUpon>201809171126171_nochange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Constituency.cs" />
@@ -498,6 +502,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ScannedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -542,6 +547,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807101309594_addextravalidations.resx">
       <DependentUpon>201807101309594_addextravalidations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171126171_nochange.resx">
+      <DependentUpon>201809171126171_nochange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

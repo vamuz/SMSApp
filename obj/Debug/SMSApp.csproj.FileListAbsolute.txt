@@ -263,7 +263,6 @@ G:\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CoreCompileInputs.cache
 G:\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CopyComplete
 G:\SMSApp\SMSApp\obj\Debug\SMSApp.dll
 G:\SMSApp\SMSApp\obj\Debug\SMSApp.pdb
-D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache
 D:\Web Development\SMSApp\SMSApp\SMSApp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\Web Development\SMSApp\SMSApp\SMSApp\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Web Development\SMSApp\SMSApp\SMSApp\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
@@ -409,3 +408,5 @@ D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.WebHost.dll
 D:\Web Development\SMSApp\SMSApp\bin\System.Net.Http.Formatting.xml
 D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.xml
 D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.WebHost.xml
+D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache
+D:\Web Development\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.nochange.resources
