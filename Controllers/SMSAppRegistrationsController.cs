@@ -22,7 +22,8 @@ namespace SMSApp.Controllers
         public ActionResult Index()
 
         {
-            var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County).Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+            var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County)
+                .Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
             return View(smsAppRegistration);
         }
 
@@ -33,11 +34,13 @@ namespace SMSApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             SMSAppRegistration sMSAppRegistration = db.SmsAppRegistration.Find(id);
             if (sMSAppRegistration == null)
             {
                 return HttpNotFound();
             }
+
             return View(sMSAppRegistration);
         }
 
@@ -55,10 +58,14 @@ namespace SMSApp.Controllers
         // POST: SMSAppRegistrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1003:SymbolsMustBeSpacedCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1005:SingleLineCommentsMustBeginWithSingleSpace", Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1003:SymbolsMustBeSpacedCorrectly", Justification =
+            "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification =
+            "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification =
+            "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1005:SingleLineCommentsMustBeginWithSingleSpace",
+            Justification = "Reviewed. Suppression is OK here.")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create( SMSAppRegistration sMSAppRegistration)
@@ -139,16 +146,17 @@ namespace SMSApp.Controllers
         public ActionResult ValidateNationalID(int idno)
         {
             var nationalid = db.SmsAppRegistration.Where(n => n.NationalIDNo == idno);
-            var status = false ;
+            var status = false;
             if (nationalid != null)
             {
                 status = true;
-             
+
             }
 
-            return Json(status , JsonRequestBehavior.AllowGet);
+            return Json(status, JsonRequestBehavior.AllowGet);
 
         }
+
         public ActionResult ValidatePhoneNo(int Phone)
         {
             var phoneNo = db.SmsAppRegistration.Where(n => n.PhoneNo == Phone);
@@ -162,23 +170,28 @@ namespace SMSApp.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
 
         }
-      
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             SMSAppRegistration sMSAppRegistration = db.SmsAppRegistration.Find(id);
             if (sMSAppRegistration == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName", sMSAppRegistration.ConstituencyId);
+
+            ViewBag.ConstituencyId =
+                new SelectList(db.Constituency, "Id", "ConstituencyName", sMSAppRegistration.ConstituencyId);
             ViewBag.CountyId = new SelectList(db.County, "Id", "CountyName", sMSAppRegistration.CountyId);
             ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType", sMSAppRegistration.GenderId);
-            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType", sMSAppRegistration.MaritalStatusId);
-            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
+            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType",
+                sMSAppRegistration.MaritalStatusId);
+            ViewBag.PWDCategoryId =
+                new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
             return View(sMSAppRegistration);
         }
 
@@ -197,72 +210,80 @@ namespace SMSApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName", sMSAppRegistration.ConstituencyId);
+
+            ViewBag.ConstituencyId =
+                new SelectList(db.Constituency, "Id", "ConstituencyName", sMSAppRegistration.ConstituencyId);
             ViewBag.CountyId = new SelectList(db.County, "Id", "CountyName", sMSAppRegistration.CountyId);
             ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType", sMSAppRegistration.GenderId);
-            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType", sMSAppRegistration.MaritalStatusId);
-            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
+            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType",
+                sMSAppRegistration.MaritalStatusId);
+            ViewBag.PWDCategoryId =
+                new SelectList(db.PwdCategory, "Id", "PWDCategoryType", sMSAppRegistration.PWDCategoryId);
             return View(sMSAppRegistration);
         }
 
         [HttpPost]
-        public JsonResult Upload()
+        public void Upload()
         {
-            try
-            {
-                string id = Request.Form["id"];
 
+            var idno = Request.Form["idno"];
+
+            var nationalId = Int64.Parse(idno);
+
+            var nationalid = db.SmsAppRegistration.SingleOrDefault(n => n.NationalIDNo == nationalId);
+
+            if (nationalid != null)
+            {
                 foreach (string file in Request.Files)
                 {
+
                     var fileContent = Request.Files[file];
 
                     if (fileContent != null && fileContent.ContentLength > 0)
                     {
 
-                        var fileExtension = Path.GetExtension(fileContent.FileName);
-                        if (fileExtension != "pdf")
                         {
-                            id = id + ".pdf";
-                        }
-                        else
-                        {
-                            id = id + fileExtension;
-                        }
+                            var id = nationalid.SMSAppRegistrationId + ".pdf";
 
-                        //var fileName = Path.GetFileName(fileContent.FileName);
-                        if (id != null)
-                        {
-                            var path = Path.Combine(Server.MapPath("~/ScannedFiles"), id);
-                            fileContent.SaveAs(path);
+
+                            //var fileName = Path.GetFileName(fileContent.FileName);
+                            if (id != null)
+                            {
+                                var path = Path.Combine(Server.MapPath("~/ScannedFiles"), id);
+                                fileContent.SaveAs(path);
+                            }
                         }
 
                     }
                 }
             }
-            catch (Exception)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json("Upload failed");
+            //return Json(Index());
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+            //    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+
+            //    //Json("File uploaded successfully");
             }
 
-            return Json("File uploaded successfully");
-        }
-
-
-        // GET: SMSAppRegistrations/Delete/5
-        public ActionResult Delete(int? id)
+            // GET: SMSAppRegistrations/Delete/5
+            public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             SMSAppRegistration sMSAppRegistration = db.SmsAppRegistration.Find(id);
             if (sMSAppRegistration == null)
             {
                 return HttpNotFound();
             }
+
             return View(sMSAppRegistration);
         }
+
+
+
 
         // POST: SMSAppRegistrations/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -283,5 +304,7 @@ namespace SMSApp.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }
+

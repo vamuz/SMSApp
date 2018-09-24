@@ -5,6 +5,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/animate.css" rel="stylesheet" />
 <link href="~/Content/Site.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -15,12 +16,11 @@
 @*@using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()*@
-<form>
+<form id="test">
     <div class="form-horizontal">
         <h4>SMSAppRegistration</h4>
         <hr />
         <div id="notification"></div>
-        <div id="notification1"></div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -122,7 +122,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type='file' id="file" single="single" />
+                <input type="file" id="file" single="single" data-validation-allowing="pdf" />
                 @*<input type="button" id="upload" value="Upload" />*@
             </div>
         </div>
@@ -143,12 +143,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    @*<script src="~/Scripts/jquery.form-validator.min.js"></script>*@
+    <script src="~/Scripts/bootbox.min.js"></script>
     <script>
 
         //post data to db using webapi
-        $(function() {
-            $("#btnSave").click(function() {
+        $(function () {
+            $("#btnSave").click(function () {
 
                 var FullNames = $("#FullNames").val();
                 var NationalIDNo = $("#NationalIDNo").val();
@@ -186,11 +187,12 @@
                     url: '/api/UserDetails',
                     data: json,
                     contentType: "application/json",
-                    success: function() {
-                        var html = 'Data Saved Successfully';
-                        $('#notification').html(html).removeClass();
-                        $('#notification').html(html).addClass('alert alert-success');
-                            //alert("Data Saved Successfully");
+                    success: function () {
+                        bootbox.alert('Data Saved Successfully');
+                        //var html = 'Data Saved Successfully';
+                        //$('#notification').html(html).removeClass();
+                        //$('#notification').html(html).addClass('alert alert-success');
+                        ////alert("Data Saved Successfully");
 
 
                         var data = new FormData();
@@ -200,7 +202,7 @@
                             data.append("file" + i, file[i]);
                         }
 
-                        data.append("id" ,"1032");
+                        data.append("idno", $("#NationalIDNo").val());
                         //Post the data (files) to the server
                         if (file.length > 0) {
                             $.ajax({
@@ -211,28 +213,23 @@
                                 processData: false,
                                 success: function (result) {
                                     alert(result);
-                                },
-                                error: function () {
-                                    alert("An error occurred!");
-                                },
+                                }
+                                //error: function () {
+                                //    alert("An error occurred!");
+                                //}
                             });
                         }
-
-
-
-
-
-
-                        },
-                    error: function (xhr) {
-                        alert(xhr.responseText);
                     }
+                    //error: function (xhr) {
+                    //    alert(xhr.responseText);
+                    //}
                 });
             });
         });
+
         //on county click
         $("#CountyId").on("change",
-            function() {
+            function () {
                 var county = $('#CountyId').val();
                 $("#ConstituencyId").removeProp('disabled');
                 $.ajax({
@@ -240,10 +237,10 @@
                     type: "GET",
                     dataType: "JSON",
                     data: { location: county },
-                    success: function(location) {
+                    success: function (location) {
                         $("#ConstituencyId").html(""); // clear before appending new list
                         $.each(location,
-                            function(i, city) {
+                            function (i, city) {
                                 $("#ConstituencyId").append(
                                     $('<option></option>').val(city.Id).html(city.ConstituencyName));
                             });
@@ -260,10 +257,10 @@
                 type: "GET",
                 dataType: "JSON",
                 data: { location: county },
-                success: function(location) {
+                success: function (location) {
                     $("#ConstituencyId").html(""); // clear before appending new list
                     $.each(location,
-                        function(i, city) {
+                        function (i, city) {
                             $("#ConstituencyId").append(
                                 $('<option></option>').val(city.Id).html(city.ConstituencyName));
                         });
@@ -273,14 +270,14 @@
         }
 
         $("#NationalIDNo").on("change keyup",
-            function() {
+            function () {
                 var idNo = $('#NationalIDNo').val();
                 $.ajax({
                     url: '/SMSAppRegistrations/ValidateNationalID',
                     type: "GET",
                     dataType: "JSON",
                     data: { idno: idNo },
-                    success: function(status) {
+                    success: function (status) {
                         if (status === true) {
                             var html = 'The national idno is already on the database';
                             $('#notification').html(html).addClass('alert alert-danger');
@@ -292,14 +289,14 @@
 
 
         $("#PhoneNo").on("change keyup",
-            function() {
+            function () {
                 var pnumber = $('#PhoneNo').val();
                 $.ajax({
                     url: '/SMSAppRegistrations/ValidatePhoneNo',
                     type: "GET",
                     dataType: "JSON",
                     data: { Phone: pnumber },
-                    success: function(status) {
+                    success: function (status) {
                         if (status === true) {
                             var html = 'The Phone number is already on the database';
                             $('#notification').html(html).addClass('alert alert-danger');
@@ -309,14 +306,14 @@
             });
 
         $("#EmailAddress").on("change keyup",
-            function() {
+            function () {
                 var contact = $('#EmailAddress').val();
                 $.ajax({
                     url: '/SMSAppRegistrations/ValidateEmail',
                     type: "GET",
                     dataType: "JSON",
                     data: { emailadd: contact },
-                    success: function(status) {
+                    success: function (status) {
                         if (status === true) {
                             var html = 'The email address is already on the database';
                             $('#notification').html(html).addClass('alert alert-danger');
@@ -325,35 +322,35 @@
                 });
             });
 
-        $(document).ready(function () {
-            $("#upload").click(function () {
-                var data = new FormData();
+        //$(document).ready(function () {
+        //    $("#upload").click(function () {
+        //        var data = new FormData();
 
-                //Add the Multiple selected files into the data object
-                var file = $("#files").get(0).files;
-                for (i = 0; i < file.length; i++) {
-                    data.append("file" + i, file[i]);
-                }
+        //        //Add the Multiple selected files into the data object
+        //        var file = $("#files").get(0).files;
+        //        for (i = 0; i < file.length; i++) {
+        //            data.append("file" + i, file[i]);
+        //        }
 
-                data.append("id" ,"1032");
-                //Post the data (files) to the server
-                if (file.length > 0) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "/SMSAppRegistrations/Upload",
-                        data: data,
-                        contentType: false,
-                        processData: false,
-                        success: function (result) {
-                            alert(result);
-                        },
-                        error: function () {
-                            alert("An error occurred!");
-                        },
-                    });
-                }
-            });
-        });
+        //        data.append("id", "1032");
+        //        //Post the data (files) to the server
+        //        if (file.length > 0) {
+        //            $.ajax({
+        //                type: 'POST',
+        //                url: "/SMSAppRegistrations/Upload",
+        //                data: data,
+        //                contentType: false,
+        //                processData: false,
+        //                success: function (result) {
+        //                    alert(result);
+        //                },
+        //                error: function () {
+        //                    alert("An error occurred!");
+        //                },
+        //            });
+        //        }
+        //    });
+        //});
 
     </script>
 }
@@ -361,25 +358,4 @@
 
 
 
-<script>
 
-        ////on county load
-        //$(document).ready(function ()
-        //{
-        //    var countyId = $('#County').val();
-        //    //$("#SubCounty").removeProp('disabled');
-        //    $.ajax({
-        //        url: '/SMSAppRegistrations/FillConstituency',
-        //        type: "GET",
-        //        dataType: "JSON",
-        //        data: { County: CountyId },
-        //        success: function (County) {
-        //            $("#ConstituencyId").html(""); // clear before appending new list
-        //            $.each(County, function (i, County) {
-        //                $("#ConstituencyId").append(
-        //                    $('<option></option>').val(County.Id).html(city.Constituency));
-        //            });
-        //        }
-        //    });
-        //});
-</script>

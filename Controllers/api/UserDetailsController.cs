@@ -45,9 +45,11 @@ namespace SMSApp.Controllers.api
                     };
                     db.SmsAppRegistration.Add(newEntry);
                     db.SaveChanges();
+                   
                 }
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
+            
         }
 
         // PUT api/<controller>/5
