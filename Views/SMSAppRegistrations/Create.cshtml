@@ -16,7 +16,7 @@
 @*@using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()*@
-<form id="test">
+@*<form id="test">
     <div class="form-horizontal">
         <h4>SMSAppRegistration</h4>
         <hr />
@@ -88,8 +88,7 @@
             @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CountyId", null, htmlAttributes: new {
-                    @class = "form-control"
-                    /*@onchange = "FillConstituency();"*/,})
+                    @class = "form-control",})
                 @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -123,19 +122,154 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="file" id="file" single="single" data-validation-allowing="pdf" />
-                @*<input type="button" id="upload" value="Upload" />*@
-            </div>
+                </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @*<input type="submit" value="Create" class="btn btn-default" />*@
+              
                 <a href="#" class="btn btn-success" id="btnSave">Save Record</a>
             </div>
         </div>
     </div>
-</form>
+</form>*@
 @*}*@
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- dialog body -->
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <form>
+                    <div class="form-horizontal">
+                        <h4>SMSAppRegistration</h4>
+                        <hr />
+                        <div id="notification"></div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FullNames, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FullNames, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NationalIDNo, "National ID/Passport No", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NationalIDNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NationalIDNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.YearofBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.YearofBirth, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.YearofBirth, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaritalStatusId, "MaritalStatus", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("MaritalStatusId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MaritalStatusId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GenderId, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("GenderId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("CountyId", null, htmlAttributes: new {
+                                    @class = "form-control"
+                                    /*@onchange = "FillConstituency();"*/,})
+                                @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConstituencyId, "Constituency", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("ConstituencyId", null, htmlAttributes: new
+                                {
+                                    @class = "form-control",})
+                                @Html.ValidationMessageFor(model => model.ConstituencyId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PWDCategoryId, "PWDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("PWDCategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PWDCategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="file" id="file" single="single" data-validation-allowing="pdf" />
+                                @*<input type="button" id="upload" value="Upload" />*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @*<input type="submit" value="Create" class="btn btn-default" />*@
+                                @*<a href="#" class="btn btn-success" id="btnSave">Save Record</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- dialog buttons -->
+            <div class="modal-footer">
+                <a href="#" class="btn btn-success" id="btnSave">Save Record</a>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -145,7 +279,28 @@
     @Scripts.Render("~/bundles/jqueryval")
     @*<script src="~/Scripts/jquery.form-validator.min.js"></script>*@
     <script src="~/Scripts/bootbox.min.js"></script>
+    
+    
     <script>
+        $("#myModal").on("show", function() {    // wire up the OK button to dismiss the modal when shown
+            $("#myModal a.btn").on("click", function(e) {
+                $("#myModal").modal('hide');     // dismiss the dialog
+            });
+        });
+        $("#myModal").on("hide", function() {    // remove the event listeners when the dialog is dismissed
+            $("#myModal a.btn").off("click");
+        });
+    
+        $("#myModal").on("hidden", function() {  // remove the actual elements from the DOM when fully hidden
+            $("#myModal").remove();
+        });
+    
+        $("#myModal").modal({                    // wire up the actual modal functionality and show the dialog
+            "backdrop"  : true,
+            "keyboard"  : true,
+            "show"      : true                     // ensure the modal is shown immediately
+        });
+    
 
         //post data to db using webapi
         $(function () {
@@ -201,9 +356,22 @@
                         for (i = 0; i < file.length; i++) {
                             data.append("file" + i, file[i]);
                         }
-
+                        //$('#file').on('keyup',function (e) {
+                        //        var files = e.target.files;
+                        //        if (files.length > 0) {
+                        //            if (this.value.lastIndexOf('.pdf') === -1) {
+                        //                alert('Only pdf files are allowed!');
+                        //                this.value = '';
+                        //                return;
+                        //            }
+                        //        }
+                        //    });
                         data.append("idno", $("#NationalIDNo").val());
                         //Post the data (files) to the server
+                        //var FileLength = $("#file")[0].files.length;
+                        //if(FileLength === 0){
+                        //    alert("No file selected.");
+                        //}
                         if (file.length > 0) {
                             $.ajax({
                                 type: 'POST',
@@ -213,16 +381,12 @@
                                 processData: false,
                                 success: function (result) {
                                     alert(result);
-                                }
-                                //error: function () {
-                                //    alert("An error occurred!");
-                                //}
+                                },
+                                
                             });
                         }
                     }
-                    //error: function (xhr) {
-                    //    alert(xhr.responseText);
-                    //}
+                    
                 });
             });
         });
