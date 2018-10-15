@@ -383,38 +383,9 @@
                         for (i = 0; i < file.length; i++) {
                             data.append("file" + i, file[i]);
                         }
-                        
-                        //$('#file').on('keyup',function (e) {
-                        //        var files = e.target.files;
-                        //        if (files.length > 0) {
-                        //            if (this.value.lastIndexOf('.pdf') === -1) {
-                        //                alert('Only pdf files are allowed!');
-                        //                this.value = '';
-                        //                return;
-                        //            }
-                        //        }
-                        //    });
+                     
                         data.append("idno", $("#NationalIDNo").val());
                         //Post the data (files) to the server
-                       
-                        //$(function () {
-                        //    $('#file').onkeyup(function () {
-                        //       if ($(this).val() === '') {
-                        //            $('.enableOnInput').prop('disabled', true);
-                        //        } else {
-                        //            $('.enableOnInput').prop('disabled', false);
-                        //        }
-                        //    });
-                        //});
-                        //$(function myform(event) {
-
-                        //    if (!document.getElementById("file").value) {
-                        //        event.preventDefault();
-                        //        alert("Please choose a file!");
-                        //    } else {
-                        //        alert("File've been chosen");
-                        //    }
-                        //});
                        
                         if (file.length > 0) {
                             $.ajax({
@@ -530,35 +501,7 @@
                 });
             });
 
-        //$(document).ready(function () {
-        //    $("#upload").click(function () {
-        //        var data = new FormData();
-
-        //        //Add the Multiple selected files into the data object
-        //        var file = $("#files").get(0).files;
-        //        for (i = 0; i < file.length; i++) {
-        //            data.append("file" + i, file[i]);
-        //        }
-
-        //        data.append("id", "1032");
-        //        //Post the data (files) to the server
-        //        if (file.length > 0) {
-        //            $.ajax({
-        //                type: 'POST',
-        //                url: "/SMSAppRegistrations/Upload",
-        //                data: data,
-        //                contentType: false,
-        //                processData: false,
-        //                success: function (result) {
-        //                    alert(result);
-        //                },
-        //                error: function () {
-        //                    alert("An error occurred!");
-        //                },
-        //            });
-        //        }
-        //    });
-        //});
+        
 
     </script>
 }

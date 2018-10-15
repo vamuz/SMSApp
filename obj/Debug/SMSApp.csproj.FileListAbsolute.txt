@@ -550,3 +550,4 @@ D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CoreCompi
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CopyComplete
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.dll
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.pdb
+D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.nochange.resources
