@@ -408,7 +408,6 @@ D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.WebHost.dll
 D:\Web Development\SMSApp\SMSApp\bin\System.Net.Http.Formatting.xml
 D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.xml
 D:\Web Development\SMSApp\SMSApp\bin\System.Web.Http.WebHost.xml
-D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache
 D:\Web Development\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.nochange.resources
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\bin\ApplicationInsights.config
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\bin\SMSApp.dll.config
@@ -551,3 +550,4 @@ D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CopyCompl
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.dll
 D:\Web Development\SMSApp\SMSApp\SMSApp\SMSApp\obj\Debug\SMSApp.pdb
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.nochange.resources
+D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache
