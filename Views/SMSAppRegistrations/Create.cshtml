@@ -6,253 +6,99 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<link href="~/Content/animate.css" rel="stylesheet" />
-<link href="~/Content/Site.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-
-<div class="m-portlet">
-    <div class="m-portlet__head">
-        <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-                <span class="m-portlet__head-icon m--hide">
-                    <i class="la la-gear"></i>
-                </span>
-                <h3 class="m-portlet__head-text">
-                    Enter Subscriber Details
-                </h3>
-            </div>
-        </div>
-    </div>
-
-    <!--begin::Form-->
-    <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
-        <div class="m-portlet__body">
-            <div class="form-group m-form__group row">
-                <label class="col-lg-1 col-form-label">Full Names:</label>
-                <div class="col-lg-3">
-                    <input type="email" class="form-control m-input" placeholder="Full name">
-                    <span class="m-form__help">Please enter your full name</span>
-                </div>
-                <label class="col-lg-1 col-form-label">Email:</label>
-                <div class="col-lg-3">
-                    <input type="email" class="form-control m-input" placeholder="Email">
-                    <span class="m-form__help">Please enter your email</span>
-                </div>
-                <label class="col-lg-1 col-form-label">Username:</label>
-                <div class="col-lg-3">
-                    <div class="input-group m-input-group m-input-group--square">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="la la-user"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control m-input" placeholder="">
-                    </div>
-                    <span class="m-form__help">Please enter your username</span>
-                </div>
-            </div>
-            <div class="form-group m-form__group row">
-                <label class="col-lg-1 col-form-label">Contact:</label>
-                <div class="col-lg-3">
-                    <input type="email" class="form-control m-input" placeholder="Enter contact number">
-                    <span class="m-form__help">Please enter your contact</span>
-                </div>
-                <label class="col-lg-1 col-form-label">Fax:</label>
-                <div class="col-lg-3">
-                    <div class="m-input-icon m-input-icon--right">
-                        <input type="text" class="form-control m-input" placeholder="Fax number">
-                        <span class="m-input-icon__icon m-input-icon__icon--right">
-                            <span>
-                                <i class="la la-info-circle"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <span class="m-form__help">Please enter fax</span>
-                </div>
-                <label class="col-lg-1 col-form-label">Address:</label>
-                <div class="col-lg-3">
-                    <div class="m-input-icon m-input-icon--right">
-                        <input type="text" class="form-control m-input" placeholder="Enter your address">
-                        <span class="m-input-icon__icon m-input-icon__icon--right">
-                            <span>
-                                <i class="la la-map-marker"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <span class="m-form__help">Please enter your address</span>
-                </div>
-            </div>
-            <div class="form-group m-form__group row">
-                <label class="col-lg-1 col-form-label">Postcode:</label>
-                <div class="col-lg-3">
-                    <div class="m-input-icon m-input-icon--right">
-                        <input type="text" class="form-control m-input" placeholder="Enter your postcode">
-                        <span class="m-input-icon__icon m-input-icon__icon--right">
-                            <span>
-                                <i class="la la-bookmark-o"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <span class="m-form__help">Please enter your postcode</span>
-                </div>
-                <label class="col-lg-1 col-form-label">User Group:</label>
-                <div class="col-lg-3">
-                    <div class="m-radio-inline">
-                        <label class="m-radio m-radio--solid">
-                            <input type="radio" name="example_2" checked value="2"> Sales Person
-                            <span></span>
-                        </label>
-                        <label class="m-radio m-radio--solid">
-                            <input type="radio" name="example_2" value="2"> Customer
-                            <span></span>
-                        </label>
-                    </div>
-                    <span class="m-form__help">Please select user group</span>
-                </div>
-            </div>
-        </div>
-        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
-            <div class="m-form__actions m-form__actions--solid">
-                <div class="row">
-                    <div class="col-lg-5"></div>
-                    <div class="col-lg-7">
-                        <button type="reset" class="btn btn-brand">Submit</button>
-                        <button type="reset" class="btn btn-secondary">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <!--end::Form-->
-</div>
-
-
-
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
 
 <div id="myModal" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- dialog body -->
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <form id="test">
-                    <div class="form-horizontal">
-                        <h4>SMSAppRegistration</h4>
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="test">
+                    <div class="fm-portlet__body">
+                        <h2 class="m-portlet__head-label m-portlet__head-label--primary">
+                            <span>Subscriber Form</span>
+                        </h2>
                         <hr />
                         <div id="notification"></div>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.FullNames, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.FullNames, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.NationalIDNo, "National ID/Passport No", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.NationalIDNo, "NationalID/PassportNo", htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.NationalIDNo, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.NationalIDNo, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.YearofBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.YearofBirth, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.YearofBirth, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.YearofBirth, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.MaritalStatusId, "MaritalStatus", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            </div><div class="col-lg-4">
+                                @Html.LabelFor(model => model.MaritalStatusId, "MaritalStatus", htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.DropDownList("MaritalStatusId", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.MaritalStatusId, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.GenderId, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.GenderId, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.DropDownList("GenderId", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.PWDCategoryId, "PWDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("PWDCategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PWDCategoryId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("CountyId", null, htmlAttributes: new {
-                                    @class = "form-control"
-                                    /*@onchange = "FillConstituency();"*/,})
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("CountyId", null, htmlAttributes: new { @class = "form-control", })
                                 @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ConstituencyId, "Constituency", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("ConstituencyId", null, htmlAttributes: new
-                                {
-                                    @class = "form-control",})
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.ConstituencyId, "Constituency", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("ConstituencyId", null, htmlAttributes: new { @class = "form-control", })
                                 @Html.ValidationMessageFor(model => model.ConstituencyId, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
                                 @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PWDCategoryId, "PWDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("PWDCategoryId", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.PWDCategoryId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="file" id="file" single="single" />
-                                @*<input type="button" id="upload" value="Upload" />*@
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                @*<input type="submit" value="Create" class="btn btn-default" />*@
-                                @*<a href="#" class="btn btn-success" id="btnSave">Save Record</a>*@
+                            
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-12">
+                                    <input type="file" class="form-control m-input" single="single" id="file" placeholder="No File Chosen">
+                                </div>
                             </div>
                         </div>
                     </div>

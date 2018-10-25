@@ -1,8 +1,6 @@
 ﻿@using SMSApp.Models
 @model LoginViewModel
 
-
-
 <section>
         <div class="m-login__signin">
             <div class="m-login__head">
@@ -49,10 +47,7 @@
                 </p>
             }
         </div>
-
     
-    
-
     @using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "m-login__forget-password", role = "form" }))
         {
             @Html.AntiForgeryToken()

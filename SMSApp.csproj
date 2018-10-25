@@ -691,6 +691,7 @@
     <Content Include="Layout.html" />
     <Content Include="login-4.html" />
     <Content Include="login.js" />
+    <Content Include="modal.html" />
     <Content Include="multi-column-forms.html" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
