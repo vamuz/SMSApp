@@ -441,9 +441,7 @@ D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.Diagnostics.FileVersionInfo.d
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.Diagnostics.Process.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.Diagnostics.StackTrace.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.Compression.dll
-D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
-D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.Pipes.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.Security.AccessControl.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.Security.Claims.dll
@@ -550,4 +548,6 @@ D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CoreCompileInputs.cache
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csproj.CopyComplete
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.dll
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.pdb
+D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.dll
+D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache

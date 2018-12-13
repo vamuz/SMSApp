@@ -22,9 +22,9 @@ namespace SMSApp.Controllers
         public ActionResult Index()
 
         {
-            var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County)
-                .Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
-            return View(smsAppRegistration);
+            //var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County)
+            //    .Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+            return View();
         }
 
         // GET: SMSAppRegistrations/Details/5
@@ -305,27 +305,68 @@ namespace SMSApp.Controllers
             base.Dispose(disposing);
         }
         [HttpPost]
-        public IEnumerable<SMSAppRegistration> GetDetails(int SMSAppRegistrationID)
+        public JsonResult GetDetails()
         //public ActionResult GetUserDetail(int SMSAppRegistrationID)
         {
-            var user = from o in db.SmsAppRegistration
-                where o.SMSAppRegistrationId == SMSAppRegistrationID
-                select new SMSAppRegistration()
-                {
-                    SMSAppRegistrationId = o.SMSAppRegistrationId,
-                    FullNames = o.FullNames,
-                    NationalIDNo = o.NationalIDNo,
-                    YearofBirth = o.YearofBirth,
-                    Gender = o.Gender,
-                    PhoneNo = o.PhoneNo,
-                    Occupation = o.Occupation,
-                    Location = o.Location,
-                    County = o.County,
-                    Constituency = o.Constituency,
-                    PWDCategory = o.PWDCategory,
-                };
-            return user.ToList();
+            try
+            {
+                var user = from o in db.SmsAppRegistration
+                    //where o.SMSAppRegistrationId == SMSAppRegistrationID
+                    select new SMSAppRegistration()
+                    {
+                        FullNames = o.FullNames,
+                        NationalIDNo = o.NationalIDNo,
+                        YearofBirth = o.YearofBirth,
+                        Gender = o.Gender,
+                        PhoneNo = o.PhoneNo,
+                        Occupation = o.Occupation,
+                        Location = o.Location,
+                        County = o.County,
+                        Constituency = o.Constituency,
+                        PWDCategory = o.PWDCategory,
+                    };
+                return Json(user.ToList());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+            }
+
+
+            return Json("");
+
         }
+
+        public ActionResult GetUserDetails()
+        {
+            var smsAppRegistration = db.SmsAppRegistration
+                .Select(
+                    o => new
+                    {
+                        id =o.SMSAppRegistrationId,
+                        FullNames = o.FullNames,
+                        NationalIDNo = o.NationalIDNo,
+                        YearofBirth = o.YearofBirth,
+                        GenderType = o.Gender.GenderType,
+                        MaritalStatusType=o.MaritalStatus.MaritalStatusType,
+                        PhoneNo = o.PhoneNo,
+                        Occupation = o.Occupation,
+                        Location = o.Location,
+                        CountyName = o.County.CountyName,
+                        EmailAddress = o.EmailAddress,
+                        ConstituencyName = o.Constituency.ConstituencyName,
+                        PWDCategoryType = o.PWDCategory.PWDCategoryType,
+                        
+
+                    }
+                );
+                //.Include(s => s.Constituency).Include(s => s.County)
+                //.Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+
+            return Json(smsAppRegistration, JsonRequestBehavior.AllowGet);
+           
+        }
+
 
     }
 }

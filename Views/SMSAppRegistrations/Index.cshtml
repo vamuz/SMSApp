@@ -128,55 +128,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullNames)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NationalIDNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.YearofBirth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender.GenderType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaritalStatus.MaritalStatusType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Constituency.ConstituencyName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.County.CountyName)
-                    </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PWDCategory.PWDCategoryType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Occupation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmailAddress)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.SMSAppRegistrationId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.SMSAppRegistrationId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.SMSAppRegistrationId })
-                    </td>
-                </tr>
-            }
-        </tbody>
     </table>
 </div>
 
@@ -188,45 +140,80 @@
 
 
     <script>
-        $(document).ready(function() {
-            $("#SMSAppRegistrations").DataTable({
-                "ajax":{
-                    url: '/SMSAppRegistrations/GetDetails',
-                    type: "POST",
-                    dataType: "JSON"
-                    
-                },
-                column:[
-                    { data: "fullNames"},
-                    { data: "nationalIDNo"},
-                    { data: "yearofBirth"},
-                    { data: "genderType"},
-                    { data: "maritalStatusType"},
-                    { data: "phoneNo"},
-                    { data: "constituencyName"},
-                    { data: "countyName"},
-                    { data: "pWDCategoryType"},
-                    { data: "occupation"},
-                    { data: "location"},
-                    { data: "emailAddress"}
+        //$(document).ready(function() {
+        //    $("#SMSAppRegistrations").DataTable({
+        //        "ajax":{
+        //            url: '/SMSAppRegistrations/GetUserDetails',
+        //            type: "POST",
+        //            dataType: "JSON"
 
-                    ],
-                responsive: !0,
-                dom: "<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>\n\t\t\t<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-                buttons: ["print", "copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"],
+        //        },
+        //        responsive: !0,
+        //        dom: "<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>\n\t\t\t<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
+        //        buttons: ["print", "copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"],
 
+        //        column:[
+        //            { data: "FullNames"},
+        //            { data: "NationalIDNo"},
+        //            { data: "YearofBirth"},
+        //            { data: "GenderType"},
+        //            { data: "MaritalStatusType"},
+        //            { data: "PhoneNo"},
+        //            { data: "ConstituencyName"},
+        //            { data: "CountyName"},
+        //            { data: "PWDCategoryType"},
+        //            { data: "Occupation"},
+        //            { data: "Location"},
+        //            { data: "EmailAddress"}
+        //            ]
 
-                "serverSide": "true",
-                //"order":[0,"asc"],
-                "Processing": "true"
+        //    });
 
 
-            });
-
-
+        //});
+        $("#SMSAppRegistrations").DataTable({
+            responsive: !0,
+            colReorder: !0,
+            "order": [[0, "dsc"]],
+            dom: 'Bfrtip',
+            buttons: ['pdf', 'csv', 'print', 'excel'],
+            ajax: {
+                url: '/SMSAppRegistrations/GetUserDetails',
+                type: "Get",
+                dataType: "JSON",
+                "dataSrc": ""
+            },
+            columns: [
+                { data: "FullNames" },
+                { data: "NationalIDNo" },
+                { data: "YearofBirth" },
+                { data: "GenderType" },
+                { data: "MaritalStatusType" },
+                { data: "PhoneNo" },
+                { data: "ConstituencyName" },
+                { data: "CountyName" },
+                { data: "PWDCategoryType" },
+                { data: "Occupation" },
+                { data: "Location" },
+                { data: "EmailAddress" },
+                {
+                    data: { id: "id" },
+                    "render": function (data, type, row, meta) {
+                        data =
+                            '<button type="button" class="EditSMSDetails btn m-btn--pill btn-outline-success btn-sm" data-id="' + data.id + '">Edit</button>';
+                        return data;
+                    }
+                }
+            ]
         });
 
+        $(document).on('click', '.EditSMSDetails', function () {
+            var id = $(this).data('id');
 
+            alert("You clicked the element with and ID of 'test-element '"+id);
+        });
+
+        
     </script>
 
 
