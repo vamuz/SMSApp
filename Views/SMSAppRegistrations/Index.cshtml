@@ -188,12 +188,42 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#SMSAppRegistrations").DataTable({
-                responsive: !0, dom: "<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>\n\t\t\t<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
+                "ajax":{
+                    url: '/SMSAppRegistrations/GetDetails',
+                    type: "POST",
+                    dataType: "JSON"
+                    
+                },
+                column:[
+                    { data: "fullNames"},
+                    { data: "nationalIDNo"},
+                    { data: "yearofBirth"},
+                    { data: "genderType"},
+                    { data: "maritalStatusType"},
+                    { data: "phoneNo"},
+                    { data: "constituencyName"},
+                    { data: "countyName"},
+                    { data: "pWDCategoryType"},
+                    { data: "occupation"},
+                    { data: "location"},
+                    { data: "emailAddress"}
+
+                    ],
+                responsive: !0,
+                dom: "<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>\n\t\t\t<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
                 buttons: ["print", "copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"],
 
+
+                "serverSide": "true",
+                //"order":[0,"asc"],
+                "Processing": "true"
+
+
             });
+
+
         });
 
 

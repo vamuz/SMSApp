@@ -304,6 +304,28 @@ namespace SMSApp.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public IEnumerable<SMSAppRegistration> GetDetails(int SMSAppRegistrationID)
+        //public ActionResult GetUserDetail(int SMSAppRegistrationID)
+        {
+            var user = from o in db.SmsAppRegistration
+                where o.SMSAppRegistrationId == SMSAppRegistrationID
+                select new SMSAppRegistration()
+                {
+                    SMSAppRegistrationId = o.SMSAppRegistrationId,
+                    FullNames = o.FullNames,
+                    NationalIDNo = o.NationalIDNo,
+                    YearofBirth = o.YearofBirth,
+                    Gender = o.Gender,
+                    PhoneNo = o.PhoneNo,
+                    Occupation = o.Occupation,
+                    Location = o.Location,
+                    County = o.County,
+                    Constituency = o.Constituency,
+                    PWDCategory = o.PWDCategory,
+                };
+            return user.ToList();
+        }
 
     }
 }
