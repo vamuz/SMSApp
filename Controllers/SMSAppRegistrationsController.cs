@@ -19,11 +19,25 @@ namespace SMSApp.Controllers
         public ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SMSAppRegistrations
+        //public ActionResult Index()
+
+        //{
+        //    //var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County)
+        //    //    .Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+
+        //    return View();
+        //}
+
         public ActionResult Index()
 
         {
-            //var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County)
-            //    .Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+            //var smsAppRegistration = db.SmsAppRegistration.Include(s => s.Constituency).Include(s => s.County).Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+            //return View(smsAppRegistration);
+            ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName");
+            ViewBag.CountyId = new SelectList(db.County, "Id", "CountyName");
+            ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType");
+            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType");
+            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType");
             return View();
         }
 
@@ -367,6 +381,25 @@ namespace SMSApp.Controllers
            
         }
 
+        public ActionResult EditSmsDetails(int id)
+        {
+            try
+            {
+                var _getDetails = db.SmsAppRegistration
+                    .SingleOrDefault(n => n.SMSAppRegistrationId == id);
+
+                return Json(_getDetails, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+
+        }
 
     }
 }

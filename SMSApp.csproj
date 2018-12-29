@@ -747,6 +747,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Scripts\smsapp.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\RegisterAccount.html" />
     <Content Include="Views\SMSAppRegistrations\StyleSheet1.css" />
