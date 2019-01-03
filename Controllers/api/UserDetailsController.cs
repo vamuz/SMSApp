@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -22,44 +23,64 @@ namespace SMSApp.Controllers.api
 
         [HttpPost]
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody] SMSAppRegistration userData)
+        public int Post([FromBody] SMSAppRegistration userData)
         {
             if (ModelState.IsValid)
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    var newEntry = new SMSAppRegistration()
+                    if (userData.SMSAppRegistrationId == 0)
                     {
-                        FullNames = userData.FullNames,
-                        NationalIDNo = userData.NationalIDNo,
-                        YearofBirth = userData.YearofBirth,
-                        PhoneNo = userData.PhoneNo,
-                        EmailAddress = userData.EmailAddress,
-                        MaritalStatusId = userData.MaritalStatusId,
-                        GenderId = userData.GenderId,
-                        Occupation = userData.Occupation,
-                        CountyId = userData.CountyId,
-                        ConstituencyId = userData.ConstituencyId,
-                        Location = userData.Location,
-                        PWDCategoryId = userData.PWDCategoryId
-                    };
-                    db.SmsAppRegistration.Add(newEntry);
-                    db.SaveChanges();
-                   
+                        var newEntry = new SMSAppRegistration()
+                        {
+                            FullNames = userData.FullNames,
+                            NationalIDNo = userData.NationalIDNo,
+                            YearofBirth = userData.YearofBirth,
+                            PhoneNo = userData.PhoneNo,
+                            EmailAddress = userData.EmailAddress,
+                            MaritalStatusId = userData.MaritalStatusId,
+                            GenderId = userData.GenderId,
+                            Occupation = userData.Occupation,
+                            CountyId = userData.CountyId,
+                            ConstituencyId = userData.ConstituencyId,
+                            Location = userData.Location,
+                            PWDCategoryId = userData.PWDCategoryId
+                        };
+                        db.SmsAppRegistration.Add(newEntry);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        var _exists = db.SmsAppRegistration.SingleOrDefault(n =>
+                            n.SMSAppRegistrationId == userData.SMSAppRegistrationId);
+                        if (_exists != null)
+                        {
+                            _exists.FullNames = userData.FullNames;
+                            _exists.NationalIDNo = userData.NationalIDNo;
+                            _exists.YearofBirth = userData.YearofBirth;
+                            _exists.PhoneNo = userData.PhoneNo;
+                            _exists.EmailAddress = userData.EmailAddress;
+                            _exists.MaritalStatusId = userData.MaritalStatusId;
+                            _exists.GenderId = userData.GenderId;
+                            _exists.Occupation = userData.Occupation;
+                            _exists.CountyId = userData.CountyId;
+                            _exists.ConstituencyId = userData.ConstituencyId;
+                            _exists.Location = userData.Location;
+                            _exists.PWDCategoryId = userData.PWDCategoryId;
+                            db.SaveChanges();
+                        }
+                       
+
+                    }
                 }
             }
-            return new HttpResponseMessage(HttpStatusCode.OK);
-            
+            return userData.SMSAppRegistrationId;
         }
+        
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
+
+
 }
+
+

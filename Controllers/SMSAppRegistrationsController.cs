@@ -271,16 +271,17 @@ namespace SMSApp.Controllers
                     }
                 }
             }
+
             //return Json(Index());
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            Response.StatusCode = (int) HttpStatusCode.BadRequest;
 
             //    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
 
             //    //Json("File uploaded successfully");
-            }
+        }
 
-            // GET: SMSAppRegistrations/Delete/5
-            public ActionResult Delete(int? id)
+        // GET: SMSAppRegistrations/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -316,11 +317,13 @@ namespace SMSApp.Controllers
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
         [HttpPost]
         public JsonResult GetDetails()
-        //public ActionResult GetUserDetail(int SMSAppRegistrationID)
+            //public ActionResult GetUserDetail(int SMSAppRegistrationID)
         {
             try
             {
@@ -357,12 +360,12 @@ namespace SMSApp.Controllers
                 .Select(
                     o => new
                     {
-                        id =o.SMSAppRegistrationId,
+                        id = o.SMSAppRegistrationId,
                         FullNames = o.FullNames,
                         NationalIDNo = o.NationalIDNo,
                         YearofBirth = o.YearofBirth,
                         GenderType = o.Gender.GenderType,
-                        MaritalStatusType=o.MaritalStatus.MaritalStatusType,
+                        MaritalStatusType = o.MaritalStatus.MaritalStatusType,
                         PhoneNo = o.PhoneNo,
                         Occupation = o.Occupation,
                         Location = o.Location,
@@ -370,15 +373,15 @@ namespace SMSApp.Controllers
                         EmailAddress = o.EmailAddress,
                         ConstituencyName = o.Constituency.ConstituencyName,
                         PWDCategoryType = o.PWDCategory.PWDCategoryType,
-                        
+
 
                     }
                 );
-                //.Include(s => s.Constituency).Include(s => s.County)
-                //.Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
+            //.Include(s => s.Constituency).Include(s => s.County)
+            //.Include(s => s.Gender).Include(s => s.MaritalStatus).Include(s => s.PWDCategory);
 
             return Json(smsAppRegistration, JsonRequestBehavior.AllowGet);
-           
+
         }
 
         public ActionResult EditSmsDetails(int id)
@@ -401,6 +404,20 @@ namespace SMSApp.Controllers
 
         }
 
+        public ActionResult DeleteSmsDetails(int id)
+        
+        {
+            var deleteDetails = db.SmsAppRegistration
+                .SingleOrDefault(n => n.SMSAppRegistrationId == id);
+            if (deleteDetails != null)
+            {
+                db.SmsAppRegistration.Remove(deleteDetails);
+                db.SaveChanges();
+                return Json(deleteDetails, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("");
+        }
     }
 }
 

@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<SMSApp.Models.SMSAppRegistration>*@
-
+﻿
 @model SMSApp.Models.SMSAppRegistration
 
 @{
@@ -8,6 +7,7 @@
 <link href="~/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 
 <!-- BEGIN: Subheader -->
+
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
@@ -135,130 +135,11 @@
                     @Html.DisplayNameFor(model => model.EmailAddress)
                 </th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
 
     </table>
-</div>
-
-
-
-<div class="modal fade" id="SmsDetailsPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                @*<h5 class="modal-title" id="exampleModalLabel">New Record</h5>*@
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <hidden id="EditSmsAppId"></hidden>
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.FullNames, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.FullNames, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.NationalIDNo, "ID/PassportNo", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.NationalIDNo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NationalIDNo, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.YearofBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.YearofBirth, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.YearofBirth, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.MaritalStatusId, "MaritalStatus", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.DropDownList("MaritalStatusId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.MaritalStatusId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.GenderId, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.DropDownList("GenderId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.CountyId, "County", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.DropDownList("CountyId", null, htmlAttributes: new
-                        {
-                            @class = "form-control"
-
-                        })
-                        @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.ConstituencyId, "Constituency", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.DropDownList("ConstituencyId", null, htmlAttributes: new
-                        {
-                            @class = "form-control",
-                        })
-                        @Html.ValidationMessageFor(model => model.ConstituencyId, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-lg-4">
-                        @Html.LabelFor(model => model.PWDCategoryId, "PWDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.DropDownList("PWDCategoryId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.PWDCategoryId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="file" name="file" id="file" />
-
-
-                        <a href="#" class="btn btn-success" id="btnSave">Save Record</a>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @*<input type="submit" value="Create" class="btn btn-default" />*@
-
-
-                            @*<button class="btn btn-success" id="btnSave">Save Record</button>*@
-                            @*<a href="#" class="btn btn-success" id="btnSaveRecord">Save Record</a>*@
-                        </div>
-                    </div>
-                </div>
-
-                @*<div>
-                        @Html.ActionLink("Back to List", "Index")
-                    </div>*@
-
-
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal -->
@@ -267,13 +148,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 @*<h5 class="modal-title" id="exampleModalLabel">New Record</h5>*@
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" id="Close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group m-form__group row">
+                    <hidden id="SMSAppRegistrationId"></hidden>
                     <div class="col-lg-4">
                         @Html.LabelFor(model => model.FullNames, htmlAttributes: new { @class = "control-label col-md-2" })
                         @Html.EditorFor(model => model.FullNames, new { htmlAttributes = new { @class = "form-control" } })
@@ -351,21 +233,15 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="file" name="file" id="file" />
+                        <input type="file" class="form-control m-input" single="single" id="file" placeholder="No File Chosen">
 
-                        @*<a href="#" class="btn btn-success" id="trigger">Save Record</a>*@
-                        <a href="#" class="btn btn-success" id="btnSaveRecord">Save Record</a>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @*<input type="submit" value="Create" class="btn btn-default" />*@
+                </div>
 
-
-                            @*<button class="btn btn-success" id="btnSave">Save Record</button>*@
-                            @*<a href="#" class="btn btn-success" id="btnSaveRecord">Save Record</a>*@
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnSave">Save </button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                 </div>
 
                 <div>
@@ -383,342 +259,10 @@
     <script src="~/assets/demo/default/custom/crud/datatables/extensions/buttons.js" type="text/javascript"></script>
 
     @Scripts.Render("~/bundles/jqueryval")
-    @*<script src="~/Scripts/jquery.form-validator.min.js"></script>*@
+    <script src="~/Scripts/jquery.form-validator.min.js"></script>
     <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/smsRegistrationApp.js"></script>
 
-
-    <script>
-        $("#Create").on("", function () {    // wire up the OK button to dismiss the modal when shown
-            $("#Create a.btn").on("click", function (e) {
-                $("#Create").modal('hide');     // dismiss the dialog
-            });
-        });
-        $("#Create").on("hide", function () {    // remove the event listeners when the dialog is dismissed
-            $("#Create a.btn").off("click");
-        });
-
-        $("#mCreate").on("hidden", function () {  // remove the actual elements from the DOM when fully hidden
-            $("#Create").remove();
-        });
-
-        $("#Create").modal({                    // wire up the actual modal functionality and show the dialog
-            "backdrop": true,
-            "keyboard": true,
-            "show": false                     // ensure the modal is shown immediately
-        });
-
-
-        //post data to db using webapi
-        $(function () {
-            $("#btnSave").click(function () {
-                var FileLength = $("#file")[0].files.length;
-                if (FileLength === 0) {
-                    alert("No file selected.");
-                    return false;
-                }
-
-                //check if the file has been selected
-                //var checkFile = $("#file").get(0).files;
-                //if (checkFile.length === 0) {
-                //    alert('Please select the upload file');
-                //    return;
-                //}
-                //check the file type --pdf only
-                var extension = $('#file').val().split('.').pop().toLowerCase();
-
-                if ($.inArray(extension, ['pdf']) === -1) {
-                    alert('Sorry, invalid extension. PDF file ONLY');
-                    return false;
-                }
-
-                var FullNames = $("#FullNames").val();
-                var NationalIDNo = $("#NationalIDNo").val();
-                var YearofBirth = $("#YearofBirth").val();
-                var PhoneNo = $("#PhoneNo").val();
-                var EmailAddress = $("#EmailAddress").val();
-                var MaritalStatusId = $("#MaritalStatusId").val();
-                var GenderId = $("#GenderId").val();
-                var Occupation = $("#Occupation").val();
-                var CountyId = $("#CountyId").val();
-                var ConstituencyId = $("#ConstituencyId").val();
-                var Location = $("#Location").val();
-                var PWDCategoryId = $("#PWDCategoryId").val();
-
-
-                var userData = {
-                    FullNames: FullNames,
-                    NationalIDNo: NationalIDNo,
-                    YearofBirth: YearofBirth,
-                    PhoneNo: PhoneNo,
-                    EmailAddress: EmailAddress,
-                    MaritalStatusId: MaritalStatusId,
-                    GenderId: GenderId,
-                    Occupation: Occupation,
-                    CountyId: CountyId,
-                    ConstituencyId: ConstituencyId,
-                    Location: Location,
-                    PWDCategoryId: PWDCategoryId
-
-                };
-                var json = JSON.stringify(userData);
-
-                $.ajax({
-                    type: "POST",
-                    url: '/api/UserDetails',
-                    data: json,
-                    contentType: "application/json",
-                    success: function () {
-                        bootbox.alert('Data Saved Successfully');
-
-                        $("#test").trigger("reset");
-
-                        $("#ConstituencyId").html(""); // clear before appending new list
-                        $("#ConstituencyId").append($('<option></option>').val(1).html('Select Constituency'));
-
-
-                        //var html = 'Data Saved Successfully';
-                        //$('#notification').html(html).removeClass();
-                        //$('#notification').html(html).addClass('alert alert-success');
-                        ////alert("Data Saved Successfully");
-
-
-                        var data = new FormData();
-                        //Add the Multiple selected files into the data object
-                        var file = $("#file").get(0).files;
-                        for (i = 0; i < file.length; i++) {
-                            data.append("file" + i, file[i]);
-                        }
-
-                        data.append("idno", $("#NationalIDNo").val());
-                        //Post the data (files) to the server
-
-                        if (file.length > 0) {
-                            $.ajax({
-                                type: 'POST',
-                                url: "/SMSAppRegistrations/Upload",
-                                data: data,
-                                contentType: false,
-                                processData: false,
-                                success: function (result) {
-                                    alert(result);
-                                },
-
-                            });
-                            $('#SMSAppRegistrations').DataTable().ajax.reload();
-                        }
-                    }
-                });
-
-            });
-        });
-            
-
-        //on county click
-        $("#CountyId").on("change",
-            function () {
-                var county = $('#CountyId').val();
-                $("#ConstituencyId").removeProp('disabled');
-                $.ajax({
-                    url: '/SMSAppRegistrations/FillConstituency',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { location: county },
-                    success: function (location) {
-                        $("#ConstituencyId").html(""); // clear before appending new list
-                        $.each(location,
-                            function (i, city) {
-                                $("#ConstituencyId").append(
-                                    $('<option></option>').val(city.Id).html(city.ConstituencyName));
-                            });
-                    }
-                });
-            });
-
-        function FillConstituency() {
-            console.log('countytest');
-            var county = $('#CountyId').val();
-            $("#ConstituencyId").removeProp('disabled');
-            $.ajax({
-                url: '/SMSAppRegistrations/FillConstituency',
-                type: "GET",
-                dataType: "JSON",
-                data: { location: county },
-                success: function (location) {
-                    $("#ConstituencyId").html(""); // clear before appending new list
-                    $.each(location,
-                        function (i, city) {
-                            $("#ConstituencyId").append(
-                                $('<option></option>').val(city.Id).html(city.ConstituencyName));
-                        });
-                }
-            });
-
-        }
-
-        $("#NationalIDNo").on("change keyup",
-            function () {
-                var idNo = $('#NationalIDNo').val();
-                $.ajax({
-                    url: '/SMSAppRegistrations/ValidateNationalID',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { idno: idNo },
-                    success: function (status) {
-                        if (status === true) {
-                            var html = 'The national idno is already on the database';
-                            $('#notification').html(html).addClass('alert alert-danger');
-                        }
-
-                    }
-                });
-            });
-
-
-        $("#PhoneNo").on("change keyup",
-            function () {
-                var pnumber = $('#PhoneNo').val();
-                $.ajax({
-                    url: '/SMSAppRegistrations/ValidatePhoneNo',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { Phone: pnumber },
-                    success: function (status) {
-                        if (status === true) {
-                            var html = 'The Phone number is already on the database';
-                            $('#notification').html(html).addClass('alert alert-danger');
-                        }
-                    }
-                });
-            });
-
-        $("#EmailAddress").on("change keyup",
-            function () {
-                var contact = $('#EmailAddress').val();
-                $.ajax({
-                    url: '/SMSAppRegistrations/ValidateEmail',
-                    type: "GET",
-                    dataType: "JSON",
-                    data: { emailadd: contact },
-                    success: function (status) {
-                        if (status === true) {
-                            var html = 'The email address is already on the database';
-                            $('#notification').html(html).addClass('alert alert-danger');
-                        }
-                    }
-                });
-            });
-
-
-
-    </script>
-    <script>
-        //$(document).ready(function() {
-        //    $("#SMSAppRegistrations").DataTable({
-        //        "ajax":{
-        //            url: '/SMSAppRegistrations/GetUserDetails',
-        //            type: "POST",
-        //            dataType: "JSON"
-
-        //        },
-        //        responsive: !0,
-        //        dom: "<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>\n\t\t\t<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        //        buttons: ["print", "copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"],
-
-        //        column:[
-        //            { data: "FullNames"},
-        //            { data: "NationalIDNo"},
-        //            { data: "YearofBirth"},
-        //            { data: "GenderType"},
-        //            { data: "MaritalStatusType"},
-        //            { data: "PhoneNo"},
-        //            { data: "ConstituencyName"},
-        //            { data: "CountyName"},
-        //            { data: "PWDCategoryType"},
-        //            { data: "Occupation"},
-        //            { data: "Location"},
-        //            { data: "EmailAddress"}
-        //            ]
-
-        //    });
-
-
-        //});
-        $("#SMSAppRegistrations").DataTable({
-            responsive: !0,
-            colReorder: !0,
-            "order": [[0, "asc"]],
-            dom: 'Bfrtip',
-            buttons: ['pdf', 'csv', 'print', 'excel'],
-            ajax: {
-                url: '/SMSAppRegistrations/GetUserDetails',
-                type: "Get",
-                dataType: "JSON",
-                "dataSrc": ""
-            },
-            columns: [
-                { data: "FullNames" },
-                { data: "NationalIDNo" },
-                { data: "YearofBirth" },
-                { data: "GenderType" },
-                { data: "MaritalStatusType" },
-                { data: "PhoneNo" },
-                { data: "ConstituencyName" },
-                { data: "CountyName" },
-                { data: "PWDCategoryType" },
-                { data: "Occupation" },
-                { data: "Location" },
-                { data: "EmailAddress" },
-                {
-                    data: { id: "id" },
-                    "render": function (data, type, row, meta) {
-                        data =
-                            '<button type="button" class="EditSMSDetails btn m-btn--pill btn-outline-success btn-sm" data-id="' + data.id + '">Edit</button>';
-                        return data;
-                    }
-                }
-            ]
-        });
-
-        $(document).on('click', '.EditSMSDetails',
-            function () {
-                var id = $(this).data('id');
-                $.ajax({
-                    type: "GET",
-                    DataType: "json",
-                    url: '/SMSAppRegistrations/EditSmsDetails',
-                    contentType: 'application/json; charset=utf-8',
-                    data: { id: id },
-                    //data: id,
-                    success: function (result) {
-                        $('#EditSmsAppId').val(result.SMSAppRegistrationId);
-                        $('#FullNames').val(result.FullNames);
-                        $('#NationalIDNo').val(result.NationalIDNo);
-                        $('#YearOfBirth').val(result.YearOfBirth);
-                        $('#PhoneNo').val(result.PhoneNo);
-                        $('#EmailAddress').val(result.EmailAddress);
-                        $('#MaritalStatusId').val(result.MaritalStatusId);
-                        $('#GenderId').val(result.GenderId);
-                        $('#Occupation').val(result.Occupation);
-                        $('#CountyId').val(result.CountyId);
-                        $('#ConstituencyId').val(result.ConstituencyId);
-                        $('#Location').val(result.Location);
-                        $('#PWDCategoryId').val(result.PWDCategoryId);
-                        $('#SmsDetailsPopup').modal('show');
-                    },
-                    error: function (xhr, status, p3, p4) {
-                        var err = "Error " + " " + status + " " + p3 + " " + p4;
-                        if (xhr.responseText && xhr.responseText[0] === "{")
-                            err = JSON.parse(xhr.responseText).Message;
-                        console.log(err);
-                    }
-                });
-
-            });
-
-
-
-
-    </script>
 
 
 
