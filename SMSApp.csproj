@@ -791,6 +791,7 @@
     <Content Include="Views\SMSAppRegistrations\Edit.cshtml" />
     <Content Include="Views\SMSAppRegistrations\Index.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
+    <Content Include="Views\SMSAppRegistrations\SendSMS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

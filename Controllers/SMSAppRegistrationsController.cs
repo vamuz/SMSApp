@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.Mvc;
 using SMSApp.Models;
 
@@ -184,6 +185,13 @@ namespace SMSApp.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
 
         }
+        public ActionResult County()
+        {
+            var county = db.County;
+           
+            return Json(county, JsonRequestBehavior.AllowGet);
+
+        }
 
         public ActionResult Edit(int? id)
         {
@@ -273,7 +281,7 @@ namespace SMSApp.Controllers
             }
 
             //return Json(Index());
-            Response.StatusCode = (int) HttpStatusCode.BadRequest;
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             //    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
 
@@ -323,25 +331,25 @@ namespace SMSApp.Controllers
 
         [HttpPost]
         public JsonResult GetDetails()
-            //public ActionResult GetUserDetail(int SMSAppRegistrationID)
+        //public ActionResult GetUserDetail(int SMSAppRegistrationID)
         {
             try
             {
                 var user = from o in db.SmsAppRegistration
-                    //where o.SMSAppRegistrationId == SMSAppRegistrationID
-                    select new SMSAppRegistration()
-                    {
-                        FullNames = o.FullNames,
-                        NationalIDNo = o.NationalIDNo,
-                        YearofBirth = o.YearofBirth,
-                        Gender = o.Gender,
-                        PhoneNo = o.PhoneNo,
-                        Occupation = o.Occupation,
-                        Location = o.Location,
-                        County = o.County,
-                        Constituency = o.Constituency,
-                        PWDCategory = o.PWDCategory,
-                    };
+                               //where o.SMSAppRegistrationId == SMSAppRegistrationID
+                           select new SMSAppRegistration()
+                           {
+                               FullNames = o.FullNames,
+                               NationalIDNo = o.NationalIDNo,
+                               YearofBirth = o.YearofBirth,
+                               Gender = o.Gender,
+                               PhoneNo = o.PhoneNo,
+                               Occupation = o.Occupation,
+                               Location = o.Location,
+                               County = o.County,
+                               Constituency = o.Constituency,
+                               PWDCategory = o.PWDCategory,
+                           };
                 return Json(user.ToList());
             }
             catch (Exception e)
@@ -405,7 +413,7 @@ namespace SMSApp.Controllers
         }
 
         public ActionResult DeleteSmsDetails(int id)
-        
+
         {
             var deleteDetails = db.SmsAppRegistration
                 .SingleOrDefault(n => n.SMSAppRegistrationId == id);
@@ -417,6 +425,16 @@ namespace SMSApp.Controllers
             }
 
             return Json("");
+        }
+
+        public ActionResult SendSMS()
+        {
+            ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName");
+            ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County") , "Id", "CountyName ");
+            ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType");
+            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType");
+            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType");
+            return View();
         }
     }
 }

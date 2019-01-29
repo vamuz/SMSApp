@@ -340,7 +340,7 @@ $(document).on('click', '.EditSMSDetails', function () {
 
             $('#Location').val(result.Location);
             $('#PWDCategoryId').val(result.PWDCategoryId);
-            $('#SmsDetailsPopup').modal('show');
+            $('#SmsDetailsPopup').modal();
 
         },
 
@@ -377,7 +377,7 @@ $(document).on('click', '.DeleteSMSDetails', function () {
 });
 
 
-$("#Create").on("hidden.bs.modal", function () {
-    //code to reset the form
+//$("#Create").on("hidden.bs.modal", function () {
+//    //code to reset the form
 
-});
+//});
