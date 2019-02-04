@@ -429,11 +429,11 @@ namespace SMSApp.Controllers
 
         public ActionResult SendSMS()
         {
-            ViewBag.ConstituencyId = new SelectList(db.Constituency, "Id", "ConstituencyName");
+            ViewBag.ConstituencyId = new SelectList(db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"), "Id", "ConstituencyName");
             ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County") , "Id", "CountyName ");
-            ViewBag.GenderId = new SelectList(db.Gender, "Id", "GenderType");
-            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "MaritalStatusType");
-            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory, "Id", "PWDCategoryType");
+            ViewBag.GenderId = new SelectList(db.Gender.Where(g=>g.GenderType !="Select Gender"), "Id", "GenderType");
+            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus.Where(m=>m.MaritalStatusType !="Select Marital Status"), "Id", "MaritalStatusType");
+            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory.Where(p=>p.PWDCategoryType !="Select Disability"), "Id", "PWDCategoryType");
             return View();
         }
     }

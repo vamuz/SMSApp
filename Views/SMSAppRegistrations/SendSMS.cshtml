@@ -115,8 +115,7 @@
                 </div>
             </div>
             <div class="form-group m-form__group row">
-                <div class="col-lg-4">
-                    <label class="control-label">County:</label>
+                <div class="col-lg-4">Gender:</label>
                     @Html.DropDownList("GenderId", null, htmlAttributes: new { @class = "form-control", multiple = "multiple", })
                     @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
                 </div>
@@ -191,36 +190,40 @@
     </table>
 </div>
 
+@section Scripts{
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
-<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
-<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
 
 
-<script type="text/javascript">
-    var j = jQuery.noConflict();
-    j(function () {
-        j('#CountyId').multiselect({ includeSelectAllOption: true });
-        j("#CountyId").multiselect('selectAll', false);
-        j("#CountyId").multiselect('updateButtonText');
+    <script type="text/javascript">
 
-        j('#ConstituencyId').multiselect({ includeSelectAllOption: true });
-        j("#ConstituencyId").multiselect('selectAll', false);
-        j("#ConstituencyId").multiselect('updateButtonText');
+        var j = jQuery.noConflict();
+        j(function () {
+            j('#CountyId').multiselect({ includeSelectAllOption: true });
+            j("#CountyId").multiselect('selectAll', false);
+            j("#CountyId").multiselect('updateButtonText');
 
-        j('#MaritalStatusId').multiselect({ includeSelectAllOption: true });
-        j("#MaritalStatusId").multiselect('selectAll', false);
-        j("#MaritalStatusId").multiselect('updateButtonText');
+            j('#ConstituencyId').multiselect({ includeSelectAllOption: true });
+            j("#ConstituencyId").multiselect('selectAll', false);
+            j("#ConstituencyId").multiselect('updateButtonText');
 
-        j('#GenderId').multiselect({ includeSelectAllOption: true });
-        j("#GenderId").multiselect('selectAll', false);
-        j("#GenderId").multiselect('updateButtonText');
+            j('#MaritalStatusId').multiselect({ includeSelectAllOption: true });
+            j("#MaritalStatusId").multiselect('selectAll', false);
+            j("#MaritalStatusId").multiselect('updateButtonText');
 
-        j('#PWDCategoryId').multiselect({ includeSelectAllOption: true });
-        j("#PWDCategoryId").multiselect('selectAll', false);
-        j("#PWDCategoryId").multiselect('updateButtonText');
+            j('#GenderId').multiselect({ includeSelectAllOption: true });
+            j("#GenderId").multiselect('selectAll', false);
+            j("#GenderId").multiselect('updateButtonText');
 
-    });
-</script>
+            j('#PWDCategoryId').multiselect({ includeSelectAllOption: true });
+            j("#PWDCategoryId").multiselect('selectAll', false);
+            j("#PWDCategoryId").multiselect('updateButtonText');
+
+        });
+
+        
+    </script>
+}
