@@ -33,6 +33,16 @@ namespace SMSApp.Models
         public DbSet<MaritalStatus> MaritalStatus { get; set; }
 
         public DbSet<PWDCategory> PwdCategory { get; set; }
+
+        public DbSet<pReportingCompliance> pReportingCompliance { get;set; }
+
+        public DbSet<pArticle> pArticle { get; set; }
+        public DbSet<pSupervisoryBody> pSupervisoryBody { get; set; }
+        public DbSet<pSubmissionDueDate> pSubmissionDueDate { get; set; }
+        public DbSet<pTreaty> pTreaty { get; set; }
+        
+
+    
         
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

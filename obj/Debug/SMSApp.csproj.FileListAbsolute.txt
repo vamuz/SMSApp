@@ -551,3 +551,4 @@ D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.pdb
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.dll
 D:\Web Development\SMSApp\SMSApp\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache
+D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.addReportingComplianceTable.resources
