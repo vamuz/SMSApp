@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SMSApp.Models;
 
 namespace SMSApp.Controllers
 {
     public class ReportingComplianceController : Controller
     {
+        public ApplicationDbContext db = new ApplicationDbContext();
         // GET: ReportingCompliance
         public ActionResult Index()
         {
+            ViewBag.TreatyId = new SelectList(db.pTreaty, "Id", "TreatyName");
+            ViewBag.SupervisoryBodyId = new SelectList(db.pSupervisoryBody, "Id", "SupervisoryBodyName");
+            ViewBag.ArticleId = new SelectList(db.pArticle, "Id", "ArticleName");
             return View();
         }
 
@@ -23,6 +28,10 @@ namespace SMSApp.Controllers
         // GET: ReportingCompliance/Create
         public ActionResult Create()
         {
+            ViewBag.TreatyId = new SelectList(db.pTreaty, "Id", "TreatyName");
+            ViewBag.SupervisoryBodyId = new SelectList(db.pSupervisoryBody, "Id", "SupervisoryBodyName");
+            ViewBag.ArticleId = new SelectList(db.pArticle, "Id", "ArticleName");
+            
             return View();
         }
 

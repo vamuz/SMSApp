@@ -73,15 +73,7 @@ namespace SMSApp.Controllers
         // POST: SMSAppRegistrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1003:SymbolsMustBeSpacedCorrectly", Justification =
-            "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification =
-            "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification =
-            "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.SpacingRules", "SA1005:SingleLineCommentsMustBeginWithSingleSpace",
-            Justification = "Reviewed. Suppression is OK here.")]
-        [HttpPost]
+       [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create( SMSAppRegistration sMSAppRegistration)
         //{
@@ -434,6 +426,9 @@ namespace SMSApp.Controllers
             ViewBag.GenderId = new SelectList(db.Gender.Where(g=>g.GenderType !="Select Gender"), "Id", "GenderType");
             ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus.Where(m=>m.MaritalStatusType !="Select Marital Status"), "Id", "MaritalStatusType");
             ViewBag.PWDCategoryId = new SelectList(db.PwdCategory.Where(p=>p.PWDCategoryType !="Select Disability"), "Id", "PWDCategoryType");
+
+
+
             return View();
         }
     }
