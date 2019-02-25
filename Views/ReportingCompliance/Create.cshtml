@@ -127,14 +127,14 @@
             <div class="form-group ">
                 <div class="col-lg-8">
                     @Html.LabelFor(model => model.InitialReportDueDate, "Initial Report Due Date", htmlAttributes: new { @class = "control-label col-md-8" })
-                    @Html.EditorFor(model => model.InitialReportDueDate, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type='date' class="form-control" data-date-format="dd/mm/yyyy" />
                     @Html.ValidationMessageFor(model => model.InitialReportDueDate, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group ">
                 <div class="col-lg-8">
                     @Html.LabelFor(model => model.PeriodicReportDueDate, "Periodic Report Due Date", htmlAttributes: new { @class = "control-label col-md-8" })
-                    @Html.EditorFor(model => model.PeriodicReportDueDate.ToString("dd/MM/yyyy"), new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.PeriodicReportDueDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PeriodicReportDueDate, "", new { @class = "text-danger" })
                 </div>
             </div>
