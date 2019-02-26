@@ -421,16 +421,34 @@ namespace SMSApp.Controllers
 
         public ActionResult SendSMS()
         {
-            ViewBag.ConstituencyId = new SelectList(db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"), "Id", "ConstituencyName");
-            ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County") , "Id", "CountyName ");
-            ViewBag.GenderId = new SelectList(db.Gender.Where(g=>g.GenderType !="Select Gender"), "Id", "GenderType");
-            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus.Where(m=>m.MaritalStatusType !="Select Marital Status"), "Id", "MaritalStatusType");
-            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory.Where(p=>p.PWDCategoryType !="Select Disability"), "Id", "PWDCategoryType");
-
-
-
+            ViewBag.ConstituencyId = new SelectList(db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"), "ConstituencyName", "ConstituencyName");
+            ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County") , "CountyName", "CountyName ");
+            ViewBag.GenderId = new SelectList(db.Gender.Where(g=>g.GenderType !="Select Gender"), "GenderType", "GenderType");
+            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus.Where(m=>m.MaritalStatusType !="Select Marital Status"), "MaritalStatusType", "MaritalStatusType");
+            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory.Where(p=>p.PWDCategoryType !="Select Disability"), "PWDCategoryType", "PWDCategoryType");
+            
             return View();
         }
+
+        public ActionResult FetchData(string[] County, string[] Constituency, string[] Gender, string[] MaritalStatus,
+            string[] PWDCategory)
+        {
+            string CountyList = string.Join(",", County);
+            string ConstituencyList = string.Join(",", Constituency);
+            string GenderList = string.Join(",", Gender);
+            string MaritalStatusList = string.Join(",", MaritalStatus);
+            string PWDCategoryList = string.Join(",", PWDCategory);
+
+            var details = db.SmsAppRegistration.Where(d => CountyList.Contains(d.County.CountyName)
+                                                           && ConstituencyList.Contains(d.Constituency.ConstituencyName)
+                                                           && GenderList.Contains(d.Gender.GenderType)
+                                                           && MaritalStatusList.Contains(d.MaritalStatus.MaritalStatusType)
+                                                           && PWDCategoryList.Contains(d.PWDCategory.PWDCategoryType)
+                                                          ).ToList();
+
+            return Json(details, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
 
