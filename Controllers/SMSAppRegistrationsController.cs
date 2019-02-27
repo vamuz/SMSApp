@@ -432,19 +432,34 @@ namespace SMSApp.Controllers
 
         public ActionResult FetchData(string[] County, string[] Constituency, string[] Gender, string[] MaritalStatus,
             string[] PWDCategory)
-        {
+                {
             string CountyList = string.Join(",", County);
             string ConstituencyList = string.Join(",", Constituency);
             string GenderList = string.Join(",", Gender);
             string MaritalStatusList = string.Join(",", MaritalStatus);
             string PWDCategoryList = string.Join(",", PWDCategory);
 
-            var details = db.SmsAppRegistration.Where(d => CountyList.Contains(d.County.CountyName)
+                                    var details = db.SmsAppRegistration.Where(d => CountyList.Contains(d.County.CountyName)
                                                            && ConstituencyList.Contains(d.Constituency.ConstituencyName)
                                                            && GenderList.Contains(d.Gender.GenderType)
                                                            && MaritalStatusList.Contains(d.MaritalStatus.MaritalStatusType)
                                                            && PWDCategoryList.Contains(d.PWDCategory.PWDCategoryType)
-                                                          ).ToList();
+                                                          )
+                        .Select(n=>new
+                                        {
+                                            fullnames=n.FullNames,
+                                            nationalidno=n.NationalIDNo,
+                                            yearofbirth=n.YearofBirth,
+                                            gendertype=n.Gender.GenderType,
+                                            maritalstatustype=n.MaritalStatus.MaritalStatusType,
+                                            phoneno=n.PhoneNo,
+                                            constituencyname=n.Constituency.ConstituencyName,
+                                            countyname=n.County.CountyName,
+                                            pwdcategorytype=n.PWDCategory.PWDCategoryType,
+                                            occupation=n.Occupation,
+                                            location=n.Location,
+                                            emailaddress=n.EmailAddress,
+                        }).ToList();
 
             return Json(details, JsonRequestBehavior.AllowGet);
         }

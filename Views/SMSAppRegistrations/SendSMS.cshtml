@@ -134,8 +134,7 @@
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-8">
-                        <a href="#" id="GetDataTable" class="btn btn-primary btn--sm m-btn--pill">Get Data</a>
-                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                        <a href="#" id="LoadData" class="btn btn-primary btn--sm m-btn--pill">Get Data</a>
                     </div>
                 </div>
             </div>
@@ -144,7 +143,7 @@
 
     <!--end::Form-->
 
-    <table id="SMSData" class="table table-striped- table-bordered table-hover table-checkable">
+    <table id="GetDataTable" class="table table-striped- table-bordered table-hover table-checkable">
         <thead>
             <tr>
                 <th>
@@ -183,8 +182,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EmailAddress)
                 </th>
-                <th></th>
-                <th></th>
+                
             </tr>
         </thead>
 
@@ -201,79 +199,101 @@
 
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            var j = jQuery.noConflict();
+            j(function () {
+                j('#CountyId').multiselect({ includeSelectAllOption: true });
+                j("#CountyId").multiselect('selectAll', false);
+                j("#CountyId").multiselect('updateButtonText');
 
-        var j = jQuery.noConflict();
-        j(function () {
-            j('#CountyId').multiselect({ includeSelectAllOption: true });
-            j("#CountyId").multiselect('selectAll', false);
-            j("#CountyId").multiselect('updateButtonText');
+                j('#ConstituencyId').multiselect({ includeSelectAllOption: true });
+                j("#ConstituencyId").multiselect('selectAll', false);
+                j("#ConstituencyId").multiselect('updateButtonText');
 
-            j('#ConstituencyId').multiselect({ includeSelectAllOption: true });
-            j("#ConstituencyId").multiselect('selectAll', false);
-            j("#ConstituencyId").multiselect('updateButtonText');
+                j('#MaritalStatusId').multiselect({ includeSelectAllOption: true });
+                j("#MaritalStatusId").multiselect('selectAll', false);
+                j("#MaritalStatusId").multiselect('updateButtonText');
 
-            j('#MaritalStatusId').multiselect({ includeSelectAllOption: true });
-            j("#MaritalStatusId").multiselect('selectAll', false);
-            j("#MaritalStatusId").multiselect('updateButtonText');
+                j('#GenderId').multiselect({ includeSelectAllOption: true });
+                j("#GenderId").multiselect('selectAll', false);
+                j("#GenderId").multiselect('updateButtonText');
 
-            j('#GenderId').multiselect({ includeSelectAllOption: true });
-            j("#GenderId").multiselect('selectAll', false);
-            j("#GenderId").multiselect('updateButtonText');
-
-            j('#PWDCategoryId').multiselect({ includeSelectAllOption: true });
-            j("#PWDCategoryId").multiselect('selectAll', false);
-            j("#PWDCategoryId").multiselect('updateButtonText');
-
-        });
-
-        $("#GetDataTable").on("click", function () {
-            var county = JSON.stringify($("#CountyId").val().length);
-            var constituency = JSON.stringify($("#ConstituencyId").val().length);
-            var gender = JSON.stringify($("#GenderId").val().length);
-            var maritalstatus = JSON.stringify($("#MaritalStatusId").val().length);
-            var pwd = JSON.stringify($("#PWDCategoryId").val().length);
-
-            if (pwd === "0" || county === "0" || gender === "0" || maritalstatus === "0" || constituency === "0") {
-                swal("Error!", "All the filter parameters are required", "error");
-                return;
-            }
-            $.ajax({
-                url: '/SMSAppRegistrations/FetchData',
-                type: "GET",
-                dataType: "JSON",
-                data: {
-                    county: JSON.stringify($("#CountyId").val()),
-                    maritalstatus: JSON.stringify($("#MaritalStatusId").val()),
-                    gender: JSON.stringify($("#GenderId").val()),
-                    constituency: JSON.stringify($("#ConstituencyId").val()),
-                    PWDCategory: JSON.stringify($("#PWDCategoryId").val())
-                },
-                success: function (data) {
-                    alert(data);
-                }
+                j('#PWDCategoryId').multiselect({ includeSelectAllOption: true });
+                j("#PWDCategoryId").multiselect('selectAll', false);
+                j("#PWDCategoryId").multiselect('updateButtonText');
 
             });
+            $("#GetDataTable").DataTable({
+                responsive: !0,
+                colReorder: !0,
+                "order": [[0, "dsc"]],
+                dom: 'Bfrtip',
+                buttons: ['pdf', 'csv', 'print', 'excel'],
+                ajax: {
+                    url: '/SMSAppRegistrations/FetchData',
+                    type: "POST",
+                    dataType: "JSON",
+                    "dataSrc": "",
+                    data: function (d) {
+                        d.county = JSON.stringify($("#CountyId").val());
+                        d.maritalstatus = JSON.stringify($("#MaritalStatusId").val());
+                        d.gender = JSON.stringify($("#GenderId").val());
+                        d.constituency = JSON.stringify($("#ConstituencyId").val());
+                        d.PWDCategory = JSON.stringify($("#PWDCategoryId").val());
+                    }
+                },
+                columns: [
+                    { data: "fullnames" },
+                    { data: "nationalidno" },
+                    { data: "yearofbirth" },
+                    { data: "gendertype" },
+                    { data: "maritalstatustype" },
+                    { data: "phoneno" },
+                    { data: "constituencyname" },
+                    { data: "countyname" },
+                    { data: "pwdcategorytype" },
+                    { data: "occupation" },
+                    { data: "location" },
+                    { data: "emailaddress" },
+               
+                ]
+            });
         });
+       
 
-                //$("#SMSData").DataTable({
-                //    responsive: !0,
-                //    colReorder: !0,
-                //    "order": [[0, "dsc"]],
-                //    dom: 'Bfrtip',
-                //    buttons: ['pdf', 'csv', 'print', 'excel'],
-                //    ajax: {
-                //        url: '/SMSAppRegistrations/FetchData',
-                //        type: "Get",
-                //        dataType: "JSON",
-                //        data: {
-                //            county: JSON.stringify($("#CountyId").val()),
-                //            maritalstatus: JSON.stringify($("#MaritalStatusId").val()),
-                //            gender: JSON.stringify($("#GenderId").val()),
-                //            constituency: JSON.stringify($("#ConstituencyId").val()),
-                //            pwd: JSON.stringify($("#PWDCategoryId").val())
-                //        }
+        $("#LoadData").on("click",
+            function () {
+                var county = JSON.stringify($("#CountyId").val().length);
+                var constituency = JSON.stringify($("#ConstituencyId").val().length);
+                var gender = JSON.stringify($("#GenderId").val().length);
+                var maritalstatus = JSON.stringify($("#MaritalStatusId").val().length);
+                var pwd = JSON.stringify($("#PWDCategoryId").val().length);
 
-                //    }
-                //});
+                if (pwd === "0" || county === "0" || gender === "0" || maritalstatus === "0" || constituency === "0") {
+                    swal("Error!", "All the filter parameters are required", "error");
+                    return;
+                }
+                $.ajax({
+                    url: '/SMSAppRegistrations/FetchData',
+                    type: "GET",
+                    dataType: "JSON",
+                    contentType: "application/json",
+                    data: {
+                        county: JSON.stringify($("#CountyId").val()),
+                        maritalstatus: JSON.stringify($("#MaritalStatusId").val()),
+                        gender: JSON.stringify($("#GenderId").val()),
+                        constituency: JSON.stringify($("#ConstituencyId").val()),
+                        PWDCategory: JSON.stringify($("#PWDCategoryId").val())
+                    },
+                    success: function (data) {
+                        $('#GetDataTable').DataTable().ajax.reload();
+                    }
+                });
+                
+            });
+
+        
+
+
     </script>
 }
