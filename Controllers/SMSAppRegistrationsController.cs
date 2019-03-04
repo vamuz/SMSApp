@@ -8,7 +8,10 @@ using System.Net;
 using System.Web;
 using System.Web.DynamicData;
 using System.Web.Mvc;
+using Microsoft.Owin.Security.Provider;
+using RestSharp;
 using SMSApp.Models;
+using WebGrease.Css.Ast.Selectors;
 
 namespace SMSApp.Controllers
 {
@@ -73,7 +76,7 @@ namespace SMSApp.Controllers
         // POST: SMSAppRegistrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create( SMSAppRegistration sMSAppRegistration)
         //{
@@ -177,10 +180,11 @@ namespace SMSApp.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
 
         }
+
         public ActionResult County()
         {
             var county = db.County;
-           
+
             return Json(county, JsonRequestBehavior.AllowGet);
 
         }
@@ -273,7 +277,7 @@ namespace SMSApp.Controllers
             }
 
             //return Json(Index());
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            Response.StatusCode = (int) HttpStatusCode.BadRequest;
 
             //    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
 
@@ -323,25 +327,25 @@ namespace SMSApp.Controllers
 
         [HttpPost]
         public JsonResult GetDetails()
-        //public ActionResult GetUserDetail(int SMSAppRegistrationID)
+            //public ActionResult GetUserDetail(int SMSAppRegistrationID)
         {
             try
             {
                 var user = from o in db.SmsAppRegistration
-                               //where o.SMSAppRegistrationId == SMSAppRegistrationID
-                           select new SMSAppRegistration()
-                           {
-                               FullNames = o.FullNames,
-                               NationalIDNo = o.NationalIDNo,
-                               YearofBirth = o.YearofBirth,
-                               Gender = o.Gender,
-                               PhoneNo = o.PhoneNo,
-                               Occupation = o.Occupation,
-                               Location = o.Location,
-                               County = o.County,
-                               Constituency = o.Constituency,
-                               PWDCategory = o.PWDCategory,
-                           };
+                    //where o.SMSAppRegistrationId == SMSAppRegistrationID
+                    select new SMSAppRegistration()
+                    {
+                        FullNames = o.FullNames,
+                        NationalIDNo = o.NationalIDNo,
+                        YearofBirth = o.YearofBirth,
+                        Gender = o.Gender,
+                        PhoneNo = o.PhoneNo,
+                        Occupation = o.Occupation,
+                        Location = o.Location,
+                        County = o.County,
+                        Constituency = o.Constituency,
+                        PWDCategory = o.PWDCategory,
+                    };
                 return Json(user.ToList());
             }
             catch (Exception e)
@@ -421,49 +425,75 @@ namespace SMSApp.Controllers
 
         public ActionResult SendSMS()
         {
-            ViewBag.ConstituencyId = new SelectList(db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"), "ConstituencyName", "ConstituencyName");
-            ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County") , "CountyName", "CountyName ");
-            ViewBag.GenderId = new SelectList(db.Gender.Where(g=>g.GenderType !="Select Gender"), "GenderType", "GenderType");
-            ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus.Where(m=>m.MaritalStatusType !="Select Marital Status"), "MaritalStatusType", "MaritalStatusType");
-            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory.Where(p=>p.PWDCategoryType !="Select Disability"), "PWDCategoryType", "PWDCategoryType");
-            
+            ViewBag.ConstituencyId =
+                new SelectList(db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"),
+                    "ConstituencyName", "ConstituencyName");
+            ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County"), "CountyName",
+                "CountyName ");
+            ViewBag.GenderId = new SelectList(db.Gender.Where(g => g.GenderType != "Select Gender"), "GenderType",
+                "GenderType");
+            ViewBag.MaritalStatusId =
+                new SelectList(db.MaritalStatus.Where(m => m.MaritalStatusType != "Select Marital Status"),
+                    "MaritalStatusType", "MaritalStatusType");
+            ViewBag.PWDCategoryId = new SelectList(db.PwdCategory.Where(p => p.PWDCategoryType != "Select Disability"),
+                "PWDCategoryType", "PWDCategoryType");
+
             return View();
         }
 
         public ActionResult FetchData(string[] County, string[] Constituency, string[] Gender, string[] MaritalStatus,
             string[] PWDCategory)
-                {
+        {
             string CountyList = string.Join(",", County);
             string ConstituencyList = string.Join(",", Constituency);
             string GenderList = string.Join(",", Gender);
             string MaritalStatusList = string.Join(",", MaritalStatus);
             string PWDCategoryList = string.Join(",", PWDCategory);
 
-                                    var details = db.SmsAppRegistration.Where(d => CountyList.Contains(d.County.CountyName)
+            var details = db.SmsAppRegistration.Where(d => CountyList.Contains(d.County.CountyName)
                                                            && ConstituencyList.Contains(d.Constituency.ConstituencyName)
                                                            && GenderList.Contains(d.Gender.GenderType)
-                                                           && MaritalStatusList.Contains(d.MaritalStatus.MaritalStatusType)
+                                                           && MaritalStatusList.Contains(d.MaritalStatus
+                                                               .MaritalStatusType)
                                                            && PWDCategoryList.Contains(d.PWDCategory.PWDCategoryType)
-                                                          )
-                        .Select(n=>new
-                                        {
-                                            fullnames=n.FullNames,
-                                            nationalidno=n.NationalIDNo,
-                                            yearofbirth=n.YearofBirth,
-                                            gendertype=n.Gender.GenderType,
-                                            maritalstatustype=n.MaritalStatus.MaritalStatusType,
-                                            phoneno=n.PhoneNo,
-                                            constituencyname=n.Constituency.ConstituencyName,
-                                            countyname=n.County.CountyName,
-                                            pwdcategorytype=n.PWDCategory.PWDCategoryType,
-                                            occupation=n.Occupation,
-                                            location=n.Location,
-                                            emailaddress=n.EmailAddress,
-                        }).ToList();
+                )
+                .Select(n => new
+                {
+                    fullnames = n.FullNames,
+                    nationalidno = n.NationalIDNo,
+                    yearofbirth = n.YearofBirth,
+                    gendertype = n.Gender.GenderType,
+                    maritalstatustype = n.MaritalStatus.MaritalStatusType,
+                    phoneno = n.PhoneNo,
+                    constituencyname = n.Constituency.ConstituencyName,
+                    countyname = n.County.CountyName,
+                    pwdcategorytype = n.PWDCategory.PWDCategoryType,
+                    occupation = n.Occupation,
+                    location = n.Location,
+                    emailaddress = n.EmailAddress,
+                }).ToList();
 
             return Json(details, JsonRequestBehavior.AllowGet);
         }
 
+        public string PushSMS()
+        {
+            var client = new RestClient("http://107.20.199.106/restapi/sms/1/text/single");
+
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("accept", "application/json");
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("authorization", "Basic TWFrYXVBZ25lczpXb1JkKjIwMTY==");
+            request.AddParameter("application/json", "{\"from\":\"KNCHR\", \"to\":" +
+                                                     "[\"254725827023\"],\"text\":\"Test SMS.\"}",
+                ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                return "Ok";
+            else
+                return response.ErrorMessage;
+        }
     }
 }
 
