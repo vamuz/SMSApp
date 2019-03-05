@@ -476,24 +476,61 @@ namespace SMSApp.Controllers
             return Json(details, JsonRequestBehavior.AllowGet);
         }
 
-        public string PushSMS()
-        {
-            var client = new RestClient("http://107.20.199.106/restapi/sms/1/text/single");
+        public ActionResult PushSMS(string[] County, string[] Constituency, string[] Gender, string[] MaritalStatus,
+            string[] PWDCategory)
+            {
+            string CountyList = string.Join(",", County);
+            string ConstituencyList = string.Join(",", Constituency);
+            string GenderList = string.Join(",", Gender);
+            string MaritalStatusList = string.Join(",", MaritalStatus);
+            string PWDCategoryList = string.Join(",", PWDCategory);
 
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("accept", "application/json");
-            request.AddHeader("content-type", "application/json");
-            request.AddHeader("authorization", "Basic TWFrYXVBZ25lczpXb1JkKjIwMTY==");
-            request.AddParameter("application/json", "{\"from\":\"KNCHR\", \"to\":" +
-                                                     "[\"254725827023\"],\"text\":\"Test SMS.\"}",
-                ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
+            var details = db.SmsAppRegistration.Where(d => CountyList.Contains(d.County.CountyName)
+                                                           && ConstituencyList.Contains(d.Constituency.ConstituencyName)
+                                                           && GenderList.Contains(d.Gender.GenderType)
+                                                           && MaritalStatusList.Contains(d.MaritalStatus
+                                                               .MaritalStatusType)
+                                                           && PWDCategoryList.Contains(d.PWDCategory.PWDCategoryType)
+                )
+                .Select(n => new
+                {
+                    fullnames = n.FullNames,
+                    nationalidno = n.NationalIDNo,
+                    yearofbirth = n.YearofBirth,
+                    gendertype = n.Gender.GenderType,
+                    maritalstatustype = n.MaritalStatus.MaritalStatusType,
+                    phoneno = n.PhoneNo,
+                    constituencyname = n.Constituency.ConstituencyName,
+                    countyname = n.County.CountyName,
+                    pwdcategorytype = n.PWDCategory.PWDCategoryType,
+                    occupation = n.Occupation,
+                    location = n.Location,
+                    emailaddress = n.EmailAddress,
+                }).ToList();
 
-            if (response.StatusCode == HttpStatusCode.OK)
-                return "Ok";
-            else
-                return response.ErrorMessage;
+            foreach (var item in details)
+            {
+                var client = new RestClient("http://107.20.199.106/restapi/sms/1/text/single");
+
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("accept", "application/json");
+                request.AddHeader("content-type", "application/json");
+                request.AddHeader("authorization", "Basic TWFrYXVBZ25lczpXb1JkKjIwMTY==");
+                request.AddParameter("application/json", "{\"from\":\"KNCHR\", \"to\":" +
+                                                         item.phoneno+",\"text\":\"Test SMS.\"}",
+                    ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+
+                //if (response.StatusCode == HttpStatusCode.OK)
+                //    return "Ok";
+                //else
+                //    return response.ErrorMessage;
+            }
+
+            return Json("");
         }
+       
+
     }
 }
 

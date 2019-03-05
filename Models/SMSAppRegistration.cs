@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 
@@ -27,8 +29,9 @@ namespace SMSApp.Models
 
         [Required]
         [DataType(DataType.PhoneNumber)]
+        
         [Range(700000000, 7999999999, ErrorMessage = "Invalid Mobile No.Mobile No. should be in this format 7xxxxxxxx")]
-        public int PhoneNo { get; set; }
+        public long PhoneNo { get; set; }
 
         [StringLength(150)]
         public string EmailAddress { get; set; }

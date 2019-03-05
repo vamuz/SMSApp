@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201902240945256_addReportingComplianceTable.Designer.cs">
       <DependentUpon>201902240945256_addReportingComplianceTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903051034041_updatesmsappregistrationtable1.cs" />
+    <Compile Include="Migrations\201903051034041_updatesmsappregistrationtable1.Designer.cs">
+      <DependentUpon>201903051034041_updatesmsappregistrationtable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
@@ -865,6 +869,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902240945256_addReportingComplianceTable.resx">
       <DependentUpon>201902240945256_addReportingComplianceTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051034041_updatesmsappregistrationtable1.resx">
+      <DependentUpon>201903051034041_updatesmsappregistrationtable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
