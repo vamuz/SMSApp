@@ -512,12 +512,18 @@ namespace SMSApp.Controllers
             {
                 var client = new RestClient("http://107.20.199.106/restapi/sms/1/text/single");
 
+                var phone = item.phoneno.ToString();
+                if (phone.Length == 10)
+                    phone = "254" + phone.Substring(1, 9);
+                else
+                    phone = "254" + phone;
+
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("accept", "application/json");
                 request.AddHeader("content-type", "application/json");
                 request.AddHeader("authorization", "Basic TWFrYXVBZ25lczpXb1JkKjIwMTY==");
                 request.AddParameter("application/json", "{\"from\":\"KNCHR\", \"to\":" +
-                                                         item.phoneno+",\"text\":\"Test SMS.\"}",
+                                                         phone+",\"text\":\"Test SMS.\"}",
                     ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
 
