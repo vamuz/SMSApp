@@ -31,7 +31,7 @@ namespace SMSApp.Models
         [DataType(DataType.PhoneNumber)]
         
         [Range(700000000, 7999999999, ErrorMessage = "Invalid Mobile No.Mobile No. should be in this format 7xxxxxxxx")]
-        public long PhoneNo { get; set; }
+        public int PhoneNo { get; set; }
 
         [StringLength(150)]
         public string EmailAddress { get; set; }

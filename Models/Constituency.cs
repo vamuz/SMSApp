@@ -13,6 +13,7 @@ namespace SMSApp.Models
         [StringLength(150)]
         public string ConstituencyName { get; set; }
 
+        public County  County { get; set; }
         public int CountyId { get; set; }
     }
 }

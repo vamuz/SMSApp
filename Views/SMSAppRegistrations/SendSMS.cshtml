@@ -183,7 +183,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EmailAddress)
                 </th>
-                
+
             </tr>
         </thead>
 
@@ -193,85 +193,190 @@
 @section Scripts{
     <script src="~/assets/vendors/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
     <script src="~/assets/demo/default/custom/crud/datatables/extensions/buttons.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/jqueryval")
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
-    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var j = jQuery.noConflict();
             j(function () {
-                enableFiltering: true,
                 j('#CountyId').multiselect({
+                    selectAllValue: 'multiselect-all',
+                    enableCaseInsensitiveFiltering: true,
                     enableFiltering: true,
-                    includeSelectAllOption: true
-                });
-                j("#CountyId").multiselect('selectAll', false);
-                j("#CountyId").multiselect('updateButtonText');
+                    maxHeight: '300',
+                    buttonWidth: '235',
 
 
-                
-                j('#ConstituencyId').multiselect({
-                    enableFiltering: true,
-                    includeSelectAllOption: true
-                });
-                j("#ConstituencyId").multiselect('selectAll', false);
-                j("#ConstituencyId").multiselect('updateButtonText');
+                    onChange: function (element, checked) {
+                        var County = JSON.stringify($("#CountyId").val());
+                        j.ajax({
+                            type: 'GET',
+                            dataType: "JSON",
+                            url: '/SMSAppRegistrations/GetConstituencies',
+                            data: { County: County },
+                            success: function (location) {
+                                j('#ConstituencyId').html("");
+                                j.each(location,
+                                    function (i, city) {
+                                        j("#ConstituencyId").append(
+                                            j('<option></option>').val(city.constituencyname).html(city.constituencyname));
 
-                j('#MaritalStatusId').multiselect({ includeSelectAllOption: true });
-                j("#MaritalStatusId").multiselect('selectAll', false);
-                j("#MaritalStatusId").multiselect('updateButtonText');
+                                    });
+                                j('#ConstituencyId').multiselect('rebuild');
+                                
 
-                j('#GenderId').multiselect({ includeSelectAllOption: true });
-                j("#GenderId").multiselect('selectAll', false);
-                j("#GenderId").multiselect('updateButtonText');
+                                j('#ConstituencyId').multiselect({
+                                    selectAllValue: 'multiselect-all',
+                                    enableCaseInsensitiveFiltering: true,
+                                    enableFiltering: true,
+                                });
+                                j("#ConstituencyId").multiselect('selectAll', true);
+                                j("#ConstituencyId").multiselect('updateButtonText');
+                               
 
-                j('#PWDCategoryId').multiselect({ includeSelectAllOption: true });
-                j("#PWDCategoryId").multiselect('selectAll', false);
-                j("#PWDCategoryId").multiselect('updateButtonText');
+                                
+                                
+                            }
 
-            });
-            $("#GetDataTable").DataTable({
-                responsive: !0,
-                colReorder: !0,
-                "order": [[0, "dsc"]],
-                dom: 'Bfrtip',
-                buttons: ['pdf', 'csv', 'print', 'excel'],
-                ajax: {
-                    url: '/SMSAppRegistrations/FetchData',
-                    type: "POST",
-                    dataType: "JSON",
-                    "dataSrc": "",
-                    data: function(d) {
-                        d.county = JSON.stringify($("#CountyId").val());
-                        d.maritalstatus = JSON.stringify($("#MaritalStatusId").val());
-                        d.gender = JSON.stringify($("#GenderId").val());
-                        d.constituency = JSON.stringify($("#ConstituencyId").val());
-                        d.PWDCategory = JSON.stringify($("#PWDCategoryId").val());
+                        });
                     }
-                },
-                columns: [
-                    { data: "fullnames" },
-                    { data: "nationalidno" },
-                    { data: "yearofbirth" },
-                    { data: "gendertype" },
-                    { data: "maritalstatustype" },
-                    { data: "phoneno" },
-                    { data: "constituencyname" },
-                    { data: "countyname" },
-                    { data: "pwdcategorytype" },
-                    { data: "occupation" },
-                    { data: "location" },
-                    { data: "emailaddress" },
-                ]
-            });
+                
+                     
+
+                });
+
+
+
+        j("#CountyId").multiselect('selectAll', true);
+        j("#CountyId").multiselect('updateButtonText');
+           
+
+        j('#ConstituencyId').multiselect({
+            selectAllValue: 'multiselect-all',
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: '300',
+            buttonWidth: '200',
+            numberDisplayed: 2,
+
         });
+        j("#ConstituencyId").multiselect('selectAll', true);
+        j("#ConstituencyId").multiselect('updateButtonText');
+
+        j('#MaritalStatusId').multiselect({
+            selectAllValue: 'multiselect-all',
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: '300',
+            buttonWidth: '200',
+            numberDisplayed: 2,
+        });
+        j("#MaritalStatusId").multiselect('selectAll', true);
+        j("#MaritalStatusId").multiselect('updateButtonText');
+
+        j('#GenderId').multiselect({
+            selectAllValue: 'multiselect-all',
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: '300',
+            buttonWidth: '200',
+            numberDisplayed: 2,
+        });
+        j("#GenderId").multiselect('selectAll', true);
+        j("#GenderId").multiselect('updateButtonText');
+
+        j('#PWDCategoryId').multiselect({
+            selectAllValue: 'multiselect-all',
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: '300',
+            buttonWidth: '180',
+            numberDisplayed: 2,
+        });
+        j("#PWDCategoryId").multiselect('selectAll', true);
+        j("#PWDCategoryId").multiselect('updateButtonText');
+
+                });
+
+
+        //j("#CountyId").on("change",
+        //    function() {
+        //        var county = $("#CountyId").val();
+        //        j.ajax({
+        //            type: 'GET',
+        //            dataType: "JSON",
+        //            url: '/SMSAppRegistrations/GetConstituencies' + CountyId,
+        //            data: { location: county },
+        //            success: function(location) {
+        //                j("#ConstituencyId").empty();
+        //                j('#ConstituencyId').multiselect('destroy');
+
+        //                j.each(location,
+        //                    function(i, constituency) {
+        //                        $("#ConstituencyId").append('<option value="' +
+        //                            constituency.Value +
+        //                            '">' +
+        //                            constituency.Text +
+        //                            '</option>');
+        //                    });
+
+        //                j('#ConstituencyId').multiselect({
+        //                    selectAllValue: 'multiselect-all',
+        //                    enableCaseInsensitiveFiltering: true,
+        //                    enableFiltering: true,
+        //                    maxHeight: '300',
+        //                    buttonWidth: '235',
+        //                    numberDisplayed: 2,
+        //                });
+        //            }
+        //        });
+        //    });
+
+
+        $("#GetDataTable").DataTable({
+            responsive: !0,
+            colReorder: !0,
+            "order": [[0, "dsc"]],
+            dom: 'Bfrtip',
+            buttons: ['pdf', 'csv', 'print', 'excel'],
+            ajax: {
+                url: '/SMSAppRegistrations/FetchData',
+                type: "POST",
+                dataType: "JSON",
+                "dataSrc": "",
+                data: function (d) {
+                    d.county = JSON.stringify($("#CountyId").val());
+                    d.maritalstatus = JSON.stringify($("#MaritalStatusId").val());
+                    d.gender = JSON.stringify($("#GenderId").val());
+                    d.constituency = JSON.stringify($("#ConstituencyId").val());
+                    d.PWDCategory = JSON.stringify($("#PWDCategoryId").val());
+                }
+            },
+            columns: [
+                { data: "fullnames" },
+                { data: "nationalidno" },
+                { data: "yearofbirth" },
+                { data: "gendertype" },
+                { data: "maritalstatustype" },
+                { data: "phoneno" },
+                { data: "constituencyname" },
+                { data: "countyname" },
+                { data: "pwdcategorytype" },
+                { data: "occupation" },
+                { data: "location" },
+                { data: "emailaddress" },
+            ]
+        });
+                    });
 
 
         $("#LoadData").on("click",
-            function() {
+            function () {
                 var county = JSON.stringify($("#CountyId").val().length);
                 var constituency = JSON.stringify($("#ConstituencyId").val().length);
                 var gender = JSON.stringify($("#GenderId").val().length);
@@ -294,7 +399,7 @@
                         constituency: JSON.stringify($("#ConstituencyId").val()),
                         PWDCategory: JSON.stringify($("#PWDCategoryId").val())
                     },
-                    success: function(data) {
+                    success: function (data) {
                         $('#GetDataTable').DataTable().ajax.reload();
                     }
                 });
@@ -302,7 +407,7 @@
             });
 
         $("#SendMsg").on("click",
-            function() {
+            function () {
                 var county = JSON.stringify($("#CountyId").val().length);
                 var constituency = JSON.stringify($("#ConstituencyId").val().length);
                 var gender = JSON.stringify($("#GenderId").val().length);
@@ -325,7 +430,7 @@
                         constituency: JSON.stringify($("#ConstituencyId").val()),
                         PWDCategory: JSON.stringify($("#PWDCategoryId").val())
                     },
-                    success: function(data) {
+                    success: function (data) {
                         alert(data);
                     }
                 });

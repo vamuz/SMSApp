@@ -269,6 +269,14 @@
     <Compile Include="Migrations\201903051034041_updatesmsappregistrationtable1.Designer.cs">
       <DependentUpon>201903051034041_updatesmsappregistrationtable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903140531356_updatesmsapptable.cs" />
+    <Compile Include="Migrations\201903140531356_updatesmsapptable.Designer.cs">
+      <DependentUpon>201903140531356_updatesmsapptable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903181156471_updatecountytable1.cs" />
+    <Compile Include="Migrations\201903181156471_updatecountytable1.Designer.cs">
+      <DependentUpon>201903181156471_updatecountytable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
@@ -872,6 +880,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903051034041_updatesmsappregistrationtable1.resx">
       <DependentUpon>201903051034041_updatesmsappregistrationtable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903140531356_updatesmsapptable.resx">
+      <DependentUpon>201903140531356_updatesmsapptable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903181156471_updatecountytable1.resx">
+      <DependentUpon>201903181156471_updatecountytable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

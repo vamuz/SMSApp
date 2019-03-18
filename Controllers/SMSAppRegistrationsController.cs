@@ -277,7 +277,7 @@ namespace SMSApp.Controllers
             }
 
             //return Json(Index());
-            Response.StatusCode = (int) HttpStatusCode.BadRequest;
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             //    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
 
@@ -327,25 +327,25 @@ namespace SMSApp.Controllers
 
         [HttpPost]
         public JsonResult GetDetails()
-            //public ActionResult GetUserDetail(int SMSAppRegistrationID)
+        //public ActionResult GetUserDetail(int SMSAppRegistrationID)
         {
             try
             {
                 var user = from o in db.SmsAppRegistration
-                    //where o.SMSAppRegistrationId == SMSAppRegistrationID
-                    select new SMSAppRegistration()
-                    {
-                        FullNames = o.FullNames,
-                        NationalIDNo = o.NationalIDNo,
-                        YearofBirth = o.YearofBirth,
-                        Gender = o.Gender,
-                        PhoneNo = o.PhoneNo,
-                        Occupation = o.Occupation,
-                        Location = o.Location,
-                        County = o.County,
-                        Constituency = o.Constituency,
-                        PWDCategory = o.PWDCategory,
-                    };
+                               //where o.SMSAppRegistrationId == SMSAppRegistrationID
+                           select new SMSAppRegistration()
+                           {
+                               FullNames = o.FullNames,
+                               NationalIDNo = o.NationalIDNo,
+                               YearofBirth = o.YearofBirth,
+                               Gender = o.Gender,
+                               PhoneNo = o.PhoneNo,
+                               Occupation = o.Occupation,
+                               Location = o.Location,
+                               County = o.County,
+                               Constituency = o.Constituency,
+                               PWDCategory = o.PWDCategory,
+                           };
                 return Json(user.ToList());
             }
             catch (Exception e)
@@ -425,11 +425,13 @@ namespace SMSApp.Controllers
 
         public ActionResult SendSMS()
         {
-            ViewBag.ConstituencyId =
-                new SelectList(db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"),
-                    "ConstituencyName", "ConstituencyName");
             ViewBag.CountyId = new SelectList(db.County.Where(c => c.CountyName != "Select County"), "CountyName",
                 "CountyName ");
+
+            ViewBag.ConstituencyId = new SelectList(
+                db.Constituency.Where(c => c.ConstituencyName != "Select Constituency"),
+                "ConstituencyName", "ConstituencyName");
+
             ViewBag.GenderId = new SelectList(db.Gender.Where(g => g.GenderType != "Select Gender"), "GenderType",
                 "GenderType");
             ViewBag.MaritalStatusId =
@@ -478,7 +480,7 @@ namespace SMSApp.Controllers
 
         public ActionResult PushSMS(string[] County, string[] Constituency, string[] Gender, string[] MaritalStatus,
             string[] PWDCategory)
-            {
+        {
             string CountyList = string.Join(",", County);
             string ConstituencyList = string.Join(",", Constituency);
             string GenderList = string.Join(",", Gender);
@@ -523,7 +525,7 @@ namespace SMSApp.Controllers
                 request.AddHeader("content-type", "application/json");
                 request.AddHeader("authorization", "Basic TWFrYXVBZ25lczpXb1JkKjIwMTY==");
                 request.AddParameter("application/json", "{\"from\":\"KNCHR\", \"to\":" +
-                                                         phone+",\"text\":\"Test SMS.\"}",
+                                                         phone + ",\"text\":\"Test SMS.\"}",
                     ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
 
@@ -535,8 +537,23 @@ namespace SMSApp.Controllers
 
             return Json("");
         }
-       
 
+
+        public ActionResult GetConstituencies(string[] County)
+        {
+            string CountyList = string.Join(",", County);
+
+
+            var details = db.Constituency.Where(d => CountyList.Contains(d.County.CountyName))
+
+                .Select(n => new
+                {
+                    constituencyname = n.ConstituencyName,
+                   
+                }).ToList();
+
+            return Json(details, JsonRequestBehavior.AllowGet);
+        }
     }
 }
 
