@@ -557,3 +557,10 @@ D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.updatesmsappregistr
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.updatesmsapptable.resources
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.Migrations.updatecountytable1.resources
 D:\Web Development\SMSApp\SMSApp\obj\Debug\SMSApp.csprojAssemblyReference.cache
+D:\Web Development\SMSApp\SMSApp\bin\Hangfire.Core.dll
+D:\Web Development\SMSApp\SMSApp\bin\Hangfire.SqlServer.dll
+D:\Web Development\SMSApp\SMSApp\bin\Hangfire.Core.xml
+D:\Web Development\SMSApp\SMSApp\bin\Hangfire.SqlServer.xml
+D:\Web Development\SMSApp\SMSApp\bin\es\Hangfire.Core.resources.dll
+D:\Web Development\SMSApp\SMSApp\bin\zh\Hangfire.Core.resources.dll
+D:\Web Development\SMSApp\SMSApp\bin\zh-TW\Hangfire.Core.resources.dll

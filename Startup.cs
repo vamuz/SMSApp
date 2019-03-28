@@ -1,5 +1,8 @@
-﻿using Microsoft.Owin;
+﻿using System;
+using Hangfire;
+using Microsoft.Owin;
 using Owin;
+using SMSApp.Controllers;
 
 [assembly: OwinStartupAttribute(typeof(SMSApp.Startup))]
 namespace SMSApp
@@ -9,6 +12,16 @@ namespace SMSApp
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+            GlobalConfiguration.Configuration
+                .UseSqlServerStorage("DefaultConnection");
+
+          app.UseHangfireDashboard();
+            //SMSAppRegistrationsController obj= new SMSAppRegistrationsController();
+
+            //RecurringJob.AddOrUpdate(() => obj.PushSMS(), Cron.Minutely);
+
+            app.UseHangfireServer();
         }
     }
 }
